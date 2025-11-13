@@ -3,10 +3,14 @@ frontend:
   phases:
     preBuild:
       commands:
+        - node --version
         - npm ci
     build:
       commands:
         - npm run build
+  environment:
+    variables:
+      NODE_VERSION: '20'
   artifacts:
     baseDirectory: dist
     files:
