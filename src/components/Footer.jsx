@@ -17,8 +17,8 @@ const Footer = () => {
           {/* Company Info */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-12 w-12 rounded-lg bg-white/10 backdrop-blur-sm p-2 flex items-center justify-center">
-                <img src="/logo.png" alt="SwiftMind Systems" className="h-full w-full object-contain" />
+              <div className="h-12 w-12 flex items-center justify-center">
+                <img src="/logo-transparent.png" alt="SwiftMind Systems" className="h-full w-full object-contain" />
               </div>
               <div>
                 <div className="text-xl font-bold">
