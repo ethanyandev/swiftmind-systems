@@ -134,7 +134,20 @@ npm run build
 
 ## Deployment
 
-This project can be deployed to:
+### AWS Amplify (Recommended) ⭐
+
+For production deployment with custom domain, we recommend AWS Amplify:
+- ✅ Automatic builds from GitHub
+- ✅ Global CDN
+- ✅ Free SSL certificate
+- ✅ Custom domain support
+- ✅ Continuous deployment
+
+**📖 [Complete AWS Amplify Deployment Guide](./DEPLOYMENT.md)**
+
+### Alternative Options
+
+This project can also be deployed to:
 - Vercel
 - Netlify
 - GitHub Pages
