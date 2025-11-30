@@ -53,10 +53,14 @@ export const translations = {
       },
       status: { zh: '已上线', en: 'Live' },
       features: {
-        feature1: { zh: '智能日历与实时预约', en: 'Smart Calendar & Real-time Booking' },
-        feature2: { zh: '员工管理与技能分配', en: 'Staff Availability & Skill Management' },
-        feature3: { zh: '服务/套餐管理', en: 'Service/Package Management' },
-        feature4: { zh: '签到与支付流程', en: 'Check-in & Payment Workflow' },
+        feature1: { zh: '预约管理', en: 'Appointment Management' },
+        feature2: { zh: '日程排班', en: 'Schedule Management' },
+        feature3: { zh: '客户管理', en: 'Customer Management' },
+        feature4: { zh: '订单收银', en: 'Orders & Payment' },
+        feature5: { zh: '服务管理', en: 'Service Management' },
+        feature6: { zh: '员工管理', en: 'Staff Management' },
+        feature7: { zh: '通知中心', en: 'Notification Center' },
+        feature8: { zh: '营销中心', en: 'Marketing Automation' },
       }
     },
     moodtini: {

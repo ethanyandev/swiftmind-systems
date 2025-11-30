@@ -1,5 +1,6 @@
 import React from 'react'
 import { LanguageProvider } from './contexts/LanguageContext'
+import { ThemeProvider } from './contexts/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 // import CoreValues from './components/CoreValues'
@@ -9,16 +10,18 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <LanguageProvider>
-      <div className="min-h-screen bg-white">
-        <Navbar />
-        <Hero />
-        {/* <CoreValues /> */}
-        <Products />
-        <About />
-        <Footer />
-      </div>
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <div className="min-h-screen bg-white transition-colors duration-300">
+          <Navbar />
+          <Hero />
+          {/* <CoreValues /> */}
+          <Products />
+          <About />
+          <Footer />
+        </div>
+      </LanguageProvider>
+    </ThemeProvider>
   )
 }
 

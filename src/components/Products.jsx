@@ -1,150 +1,362 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage } from '../contexts/LanguageContext'
+import { useTheme } from '../contexts/ThemeContext'
 import { t } from '../translations'
 
 const Products = () => {
   const { language } = useLanguage()
+  const { getThemeColor, isMonochrome } = useTheme()
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [bookingIndex, setBookingIndex] = useState(0)
+  const [lightboxImage, setLightboxImage] = useState(null)
 
-  const products = [
-    {
-      key: 'skillgrove',
-      statusColor: 'bg-[#34D399]',
-      gradientFrom: 'from-[#34D399]',
-      gradientTo: 'to-[#10B981]',
-      image: '/skillgrove.png',
-      logo: '/skillgrove-logo.png',
-      website: 'https://skillgrove.ca',
-    },
-    {
-      key: 'vamerchant',
-      statusColor: 'bg-[#60A5FA]',
-      gradientFrom: 'from-[#60A5FA]',
-      gradientTo: 'to-[#3B82F6]',
-      image: '/vamerchant.png',
-      logo: '/vamerchant-logo.png',
-      website: 'https://vamerchant.app',
-    },
-    {
-      key: 'moodtini',
-      statusColor: 'bg-[#FBBF24]',
-      gradientFrom: 'from-[#FBBF24]',
-      gradientTo: 'to-[#FCD34D]',
-      image: '/moodtini.png',
-      logo: '/moodtini-logo.png',
-      website: null,
-    },
+  const primaryColor = getThemeColor('#6366F1')
+  const accentColor = getThemeColor('#10B981')
+
+  // System Overview 所有图片
+  const overviewImages = [
+    '/VA/1.png', '/VA/2.png', '/VA/3.png', '/VA/4.png',
+    '/VA/5.png', '/VA/6.png', '/VA/7.png', '/VA/10.png',
+    '/VA/11.png', '/VA/13.png', '/VA/14.png'
   ]
 
-  return (
-    <section id="products" className="py-24 bg-white relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full" style={{
-          backgroundImage: 'radial-gradient(circle, #10B981 1px, transparent 1px)',
-          backgroundSize: '30px 30px'
-        }}></div>
-      </div>
+  // Online Booking 图片
+  const bookingImages = ['/VA/8.png', '/VA/9.png', '/VA/12.png']
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#2563EB]/10 to-[#10B981]/10 rounded-full mb-6">
-            <span className="text-sm font-semibold text-[#2563EB]">{t('products.badge', language)}</span>
+  // 自动轮播 - System Overview
+  useEffect(() => {
+    if (!isAutoPlaying) return
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % overviewImages.length)
+    }, 4000)
+    return () => clearInterval(timer)
+  }, [isAutoPlaying, overviewImages.length])
+
+  // 自动轮播 - Online Booking (滑动)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBookingIndex((prev) => (prev + 1) % bookingImages.length)
+    }, 3000)
+    return () => clearInterval(timer)
+  }, [bookingImages.length])
+
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + overviewImages.length) % overviewImages.length)
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 8000)
+  }
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % overviewImages.length)
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 8000)
+  }
+
+  return (
+    <section id="products" className="py-20 bg-[#fafafa] transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4"
+            style={{ backgroundColor: `${primaryColor}10` }}
+          >
+            <span
+              className="text-xs font-semibold tracking-wide"
+              style={{ color: primaryColor }}
+            >
+              {t('products.badge', language)}
+            </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-[#1E3A8A]">{t('products.title1', language)}</span>
-            <span className="text-[#10B981]">{t('products.title2', language)}</span>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 tracking-tight">
+            <span className="text-[#1a1a1a]">{t('products.title1', language)}</span>
+            <span style={{ color: primaryColor }}>{t('products.title2', language)}</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-[#666] max-w-2xl mx-auto">
             {t('products.subtitle', language)}
           </p>
         </div>
 
-        <div className="space-y-16">
-          {products.map((product, index) => (
-            <div
-              key={index}
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center`}
-            >
-              {/* Content Column */}
-              <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
-                <div className="mb-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className={`w-20 h-20 rounded-2xl ${product.logo ? 'bg-white border-2 border-gray-200' : `bg-gradient-to-br ${product.gradientFrom} ${product.gradientTo}`} flex items-center justify-center text-white shadow-lg p-2`}>
-                      {product.logo ? (
-                        <img src={product.logo} alt={`${product.name} Logo`} className="w-full h-full object-contain" />
-                      ) : (
-                        product.icon
-                      )}
-                    </div>
-                    <span className={`${product.statusColor} text-white px-4 py-1.5 rounded-full text-sm font-semibold`}>
-                      {t(`products.${product.key}.status`, language)}
+        {/* Product Header Card */}
+        <div
+          className="bg-white rounded-2xl overflow-hidden mb-8"
+          style={{
+            border: '1px solid rgba(128,128,128,0.1)',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.04)'
+          }}
+        >
+          <div className="p-6 sm:p-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-14 h-14 rounded-xl flex items-center justify-center bg-white p-2"
+                  style={{ border: '1px solid rgba(0,0,0,0.08)' }}
+                >
+                  <img
+                    src="/vamerchant-logo.png"
+                    alt="VAMerchant Logo"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div>
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-2xl font-bold text-[#1a1a1a]">
+                      {t('products.vamerchant.name', language)}
+                    </h3>
+                    <span
+                      className="px-3 py-1 rounded-full text-xs font-semibold text-white"
+                      style={{ backgroundColor: primaryColor }}
+                    >
+                      {t('products.vamerchant.status', language)}
                     </span>
                   </div>
-                  <h3 className="text-4xl font-bold text-gray-900 mb-2">
-                    {t(`products.${product.key}.name`, language)}
-                    {product.website && (
-                      <a
-                        href={product.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ml-3 inline-flex items-center text-sm text-gray-500 hover:text-gray-700 transition-colors"
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </a>
-                    )}
-                  </h3>
-                  <p className={`text-lg font-semibold bg-gradient-to-r ${product.gradientFrom} ${product.gradientTo} bg-clip-text text-transparent mb-2`}>
-                    {t(`products.${product.key}.tagline`, language)}
+                  <p className="text-[#666] mt-1">
+                    {t('products.vamerchant.description', language)}
                   </p>
-                  {product.website && (
-                    <a
-                      href={product.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-blue-600 hover:text-blue-800 hover:underline mb-4 inline-block"
-                    >
-                      {product.website.replace('https://', '')}
-                    </a>
-                  )}
-                </div>
-
-                <p className="text-gray-600 mb-8 leading-relaxed text-lg">
-                  {t(`products.${product.key}.description`, language)}
-                </p>
-
-                <div className="space-y-3">
-                  <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-4">{t('products.coreFeatures', language)}</p>
-                  <div className="grid grid-cols-2 gap-3">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div
-                        key={i}
-                        className={`bg-gradient-to-br ${product.gradientFrom} ${product.gradientTo} p-4 rounded-xl shadow-md`}
-                      >
-                        <p className="text-white font-semibold">{t(`products.${product.key}.features.feature${i}`, language)}</p>
-                      </div>
-                    ))}
-                  </div>
                 </div>
               </div>
+              <a
+                href="https://vamerchant.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 text-white rounded-lg font-medium text-sm transition-colors flex-shrink-0"
+                style={{ backgroundColor: primaryColor }}
+              >
+                {language === 'zh' ? '访问网站' : 'Visit Website'}
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
 
-              {/* Image/Video Column */}
-              <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-video border-4 border-gray-100">
-                  {product.image && (
-                    <img
-                      src={product.image}
-                      alt={`${t(`products.${product.key}.name`, language)} ${language === 'zh' ? '产品展示' : 'Product Demo'}`}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
+        {/* Core Features */}
+        <div
+          className="bg-white rounded-xl p-6 mb-8"
+          style={{ border: '1px solid rgba(128,128,128,0.1)' }}
+        >
+          <h4 className="text-sm font-semibold text-[#888] uppercase tracking-wider mb-4">
+            {t('products.coreFeatures', language)}
+          </h4>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+              <div
+                key={i}
+                className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-[#fafafa]"
+                style={{ border: '1px solid rgba(128,128,128,0.08)' }}
+              >
+                <svg
+                  className="w-4 h-4 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  style={{ color: primaryColor }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="text-sm font-medium text-[#1a1a1a]">
+                  {t(`products.vamerchant.features.feature${i}`, language)}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 2 Feature Modules - Each Full Width */}
+        <div className="space-y-6">
+          {/* System Overview Module */}
+          <div
+            className="bg-white rounded-xl overflow-hidden group"
+            style={{ border: '1px solid rgba(128,128,128,0.1)' }}
+          >
+            <div className="p-5 border-b border-[rgba(128,128,128,0.1)]">
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: `${primaryColor}10`, color: primaryColor }}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-base font-semibold text-[#1a1a1a]">
+                    {language === 'zh' ? '系统介绍' : 'System Overview'}
+                  </h4>
+                  <p className="text-sm text-[#888]">
+                    {language === 'zh' ? '一站式商户管理解决方案' : 'All-in-one merchant management'}
+                  </p>
                 </div>
               </div>
             </div>
-          ))}
+            {/* Smooth Image Carousel */}
+            <div>
+              <div className="relative aspect-[2/1] bg-[#f8f9fa]">
+                {overviewImages.map((src, index) => (
+                  <img
+                    key={index}
+                    src={src}
+                    alt={`System ${index + 1}`}
+                    onClick={() => setLightboxImage(src)}
+                    className={`absolute inset-0 w-full h-full object-contain transition-all duration-500 cursor-pointer ${
+                      index === currentIndex
+                        ? 'opacity-100 scale-100'
+                        : 'opacity-0 scale-[1.02]'
+                    }`}
+                  />
+                ))}
+                {/* Navigation Arrows */}
+                <button
+                  onClick={goToPrev}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-[#666] transition-all shadow-md"
+                  style={{ '--hover-color': primaryColor }}
+                  onMouseEnter={(e) => e.target.style.color = primaryColor}
+                  onMouseLeave={(e) => e.target.style.color = '#666'}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={goToNext}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-[#666] transition-all shadow-md"
+                  onMouseEnter={(e) => e.target.style.color = primaryColor}
+                  onMouseLeave={(e) => e.target.style.color = '#666'}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+                {/* Counter */}
+                <div className="absolute bottom-4 right-4 px-3 py-1.5 bg-black/50 rounded-full text-white text-sm font-medium">
+                  {currentIndex + 1} / {overviewImages.length}
+                </div>
+              </div>
+              {/* Thumbnail Navigation */}
+              <div className="p-3 border-t border-[rgba(128,128,128,0.1)] bg-white">
+                <div className="flex gap-2 overflow-x-auto pb-1">
+                  {overviewImages.map((src, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        setCurrentIndex(index)
+                        setIsAutoPlaying(false)
+                        setTimeout(() => setIsAutoPlaying(true), 8000)
+                      }}
+                      className={`flex-shrink-0 w-16 h-10 rounded-md overflow-hidden transition-all ${
+                        index === currentIndex
+                          ? 'ring-2 ring-offset-1'
+                          : 'opacity-50 hover:opacity-100'
+                      }`}
+                      style={index === currentIndex ? { '--tw-ring-color': primaryColor } : {}}
+                    >
+                      <img
+                        src={src}
+                        alt={`Thumbnail ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Online Booking Module */}
+          <div
+            className="bg-white rounded-xl overflow-hidden group"
+            style={{ border: '1px solid rgba(128,128,128,0.1)' }}
+          >
+            <div className="p-5 border-b border-[rgba(128,128,128,0.1)]">
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-10 h-10 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: `${accentColor}10`, color: accentColor }}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-base font-semibold text-[#1a1a1a]">
+                    {language === 'zh' ? '线上预约流程' : 'Online Booking Flow'}
+                  </h4>
+                  <p className="text-sm text-[#888]">
+                    {language === 'zh' ? '便捷的客户预约体验' : 'Seamless customer booking'}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="relative overflow-hidden">
+              {/* Sliding Container */}
+              <div
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${bookingIndex * 100}%)` }}
+              >
+                {bookingImages.map((src, index) => (
+                  <div
+                    key={index}
+                    className="flex-shrink-0 w-full p-6"
+                  >
+                    <div className="rounded-2xl overflow-hidden bg-[#f8f9fa] shadow-lg mx-auto" style={{ border: '1px solid rgba(128,128,128,0.1)', maxWidth: '90%' }}>
+                      <img
+                        src={src}
+                        alt={`Booking ${index + 1}`}
+                        onClick={() => setLightboxImage(src)}
+                        className="w-full h-auto cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {/* Dots Indicator */}
+              <div className="flex justify-center gap-2 py-4">
+                {bookingImages.map((_, index) => (
+                  <div
+                    key={index}
+                    className="w-2.5 h-2.5 rounded-full transition-colors"
+                    style={{
+                      backgroundColor: index === bookingIndex ? accentColor : '#e5e5e5'
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Coming Soon Hint */}
+        <div className="text-center mt-12">
+          <p className="text-sm text-[#888]">
+            {language === 'zh' ? '更多产品即将推出...' : 'More products coming soon...'}
+          </p>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          onClick={() => setLightboxImage(null)}
+        >
+          <button
+            className="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white transition-colors"
+            onClick={(e) => { e.stopPropagation(); setLightboxImage(null); }}
+          >
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <img
+            src={lightboxImage}
+            alt="Enlarged view"
+            className="max-w-[90vw] max-h-[85vh] object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   )
 }

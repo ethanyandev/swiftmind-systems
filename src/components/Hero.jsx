@@ -1,140 +1,199 @@
 import React from 'react'
 import { useLanguage } from '../contexts/LanguageContext'
+import { useTheme } from '../contexts/ThemeContext'
 import { t } from '../translations'
 
 const Hero = () => {
   const { language } = useLanguage()
-  // 在这里设置YouTube视频ID，例如: 'dQw4w9WgXcQ'
-  // 如果为null，则显示默认的装饰内容
-  const youtubeVideoId = null // 替换为您的YouTube视频ID
+  const { getThemeColor, isMonochrome } = useTheme()
+
+  const primaryColor = getThemeColor('#6366F1')
+  const accentColor = getThemeColor('#10B981')
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-white via-blue-50 to-green-50">
-      {/* Soft animated background */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Subtle gradient orbs */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-[#60A5FA]/20 to-[#3B82F6]/10 rounded-full filter blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-[#10B981]/20 to-[#34D399]/10 rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-        <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-gradient-to-br from-[#FBBF24]/10 to-[#FCD34D]/5 rounded-full filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+    <section id="home" className="relative min-h-[90vh] flex items-center bg-white transition-colors duration-300">
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fafafa] to-white"></div>
 
-        {/* Geometric shapes */}
-        <div className="absolute top-20 right-40 w-32 h-32 border-2 border-[#60A5FA]/20 rounded-xl animate-spin-slow"></div>
-        <div className="absolute bottom-40 left-20 w-24 h-24 border-2 border-[#10B981]/20 rotate-45 animate-bounce-slow"></div>
-        <div className="absolute top-1/3 left-1/4 w-16 h-16 bg-gradient-to-br from-[#60A5FA]/10 to-transparent rounded-full"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-20 h-20 bg-gradient-to-br from-[#34D399]/10 to-transparent rounded-lg"></div>
+      {/* Subtle decorative element */}
+      <div
+        className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full blur-3xl"
+        style={{ backgroundColor: `${primaryColor}08` }}
+      ></div>
+      <div
+        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-3xl"
+        style={{ backgroundColor: `${accentColor}08` }}
+      ></div>
 
-        {/* Dots pattern */}
-        <div className="absolute inset-0 opacity-30" style={{
-          backgroundImage: 'radial-gradient(circle, #60A5FA 1px, transparent 1px)',
-          backgroundSize: '50px 50px'
-        }}></div>
-      </div>
-
-      <style jsx>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes bounce-slow {
-          0%, 100% { transform: translateY(0) rotate(45deg); }
-          50% { transform: translateY(-20px) rotate(45deg); }
-        }
-        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
-        .animate-bounce-slow { animation: bounce-slow 6s ease-in-out infinite; }
-      `}</style>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Text Content */}
           <div>
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full mb-6 shadow-sm">
-              <div className="w-2 h-2 bg-[#10B981] rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-gray-700">{t('hero.badge', language)}</span>
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
+              style={{ backgroundColor: `${primaryColor}10` }}
+            >
+              <div
+                className="w-1.5 h-1.5 rounded-full"
+                style={{ backgroundColor: primaryColor }}
+              ></div>
+              <span
+                className="text-xs font-semibold tracking-wide"
+                style={{ color: primaryColor }}
+              >
+                {t('hero.badge', language)}
+              </span>
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="text-[#1E3A8A]">{t('hero.title1', language)}</span><br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] via-[#10B981] to-[#34D399]">{t('hero.title2', language)}</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-[1.1] tracking-tight">
+              <span className="text-[#1a1a1a]">{t('hero.title1', language)}</span>
+              <br />
+              <span style={{ color: primaryColor }}>{t('hero.title2', language)}</span>
             </h1>
 
             {/* Description */}
-            <p className="text-xl text-gray-600 mb-10 leading-relaxed">
+            <p className="text-lg text-[#666] mb-8 leading-relaxed max-w-lg">
               {t('hero.description', language)}
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               <a
                 href="#products"
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#10B981] text-white rounded-lg font-semibold hover:bg-[#059669] transform hover:scale-105 transition-all duration-200 shadow-lg shadow-[#10B981]/50"
+                className="inline-flex items-center justify-center px-6 py-3 text-white rounded-lg font-semibold text-sm transition-colors duration-200"
+                style={{
+                  backgroundColor: primaryColor,
+                  boxShadow: isMonochrome ? '0 2px 8px rgba(26,26,26,0.25)' : '0 2px 8px rgba(99,102,241,0.25)'
+                }}
               >
                 <span>{t('hero.exploreProducts', language)}</span>
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </a>
               <a
                 href="#about"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-700 rounded-lg font-semibold border-2 border-gray-200 hover:bg-gray-50 transition-all duration-200"
+                className="inline-flex items-center justify-center px-6 py-3 bg-white text-[#666] rounded-lg font-semibold text-sm border border-[rgba(0,0,0,0.12)] hover:text-[#1a1a1a] transition-colors duration-200"
+                style={{
+                  '--hover-border-color': primaryColor,
+                  '--hover-text-color': primaryColor
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.borderColor = primaryColor
+                  e.target.style.color = primaryColor
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.borderColor = 'rgba(0,0,0,0.12)'
+                  e.target.style.color = '#666'
+                }}
               >
                 {t('hero.learnMore', language)}
               </a>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-gray-200">
+            <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-[rgba(0,0,0,0.06)]">
               <div>
-                <div className="text-3xl font-bold text-[#1E3A8A] mb-1">3+</div>
-                <div className="text-sm text-gray-600">{t('hero.stats.products', language)}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-[#1a1a1a] mb-1">3+</div>
+                <div className="text-xs sm:text-sm text-[#888]">{t('hero.stats.products', language)}</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-[#1E3A8A] mb-1">100%</div>
-                <div className="text-sm text-gray-600">{t('hero.stats.satisfaction', language)}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-[#1a1a1a] mb-1">100%</div>
+                <div className="text-xs sm:text-sm text-[#888]">{t('hero.stats.satisfaction', language)}</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-[#1E3A8A] mb-1">24/7</div>
-                <div className="text-sm text-gray-600">{t('hero.stats.support', language)}</div>
+                <div className="text-2xl sm:text-3xl font-bold text-[#1a1a1a] mb-1">24/7</div>
+                <div className="text-xs sm:text-sm text-[#888]">{t('hero.stats.support', language)}</div>
               </div>
             </div>
           </div>
 
           {/* Right Column - Visual Content */}
           <div className="relative">
-            <div className="relative bg-white/70 backdrop-blur-md rounded-3xl border-2 border-gray-200 shadow-xl overflow-hidden">
+            <div
+              className="relative bg-white rounded-2xl overflow-hidden"
+              style={{
+                border: '1px solid rgba(128,128,128,0.1)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.06)'
+              }}
+            >
               <div className="aspect-video relative">
-                {youtubeVideoId ? (
-                  // YouTube视频嵌入
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${youtubeVideoId}?rel=0&modestbranding=1`}
-                    title="SwiftMind Systems 宣传视频"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                ) : (
-                  // 默认装饰内容
-                  <div className="absolute inset-0 flex items-center justify-center p-12">
-                    {/* Decorative elements */}
-                    <div className="absolute inset-0 opacity-20">
-                      <div className="absolute top-8 left-8 w-16 h-16 border-2 border-[#60A5FA] rounded-lg animate-pulse"></div>
-                      <div className="absolute bottom-8 right-8 w-12 h-12 border-2 border-[#10B981] rounded-full animate-pulse" style={{animationDelay: '0.5s'}}></div>
-                      <div className="absolute top-1/2 right-12 w-10 h-10 bg-gradient-to-br from-[#FBBF24]/30 to-transparent rounded-lg" style={{transform: 'rotate(45deg)'}}></div>
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#fafafa] to-white p-8">
+                  <div className="text-center">
+                    <div
+                      className="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center"
+                      style={{
+                        background: isMonochrome
+                          ? 'linear-gradient(135deg, rgba(26,26,26,0.1) 0%, rgba(26,26,26,0.05) 100%)'
+                          : 'linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(16,185,129,0.1) 100%)',
+                        border: `1px solid ${primaryColor}25`
+                      }}
+                    >
+                      <svg
+                        className="w-10 h-10"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        style={{ color: primaryColor }}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
                     </div>
-
-                    <div className="text-center relative z-10">
-                      <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-[#60A5FA]/10 to-[#10B981]/10 rounded-full flex items-center justify-center border-2 border-[#60A5FA]/30 relative shadow-lg">
-                        <svg className="w-16 h-16 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                      </div>
-                      <p className="text-[#1E3A8A] font-bold text-2xl mb-2">{t('hero.visualTitle', language)}</p>
-                      <p className="text-gray-600 text-sm">{t('hero.visualSubtitle', language)}</p>
-                    </div>
+                    <p className="text-[#1a1a1a] font-semibold text-lg mb-1">
+                      {t('hero.visualTitle', language)}
+                    </p>
+                    <p className="text-[#888] text-sm">
+                      {t('hero.visualSubtitle', language)}
+                    </p>
                   </div>
-                )}
+                </div>
+              </div>
+            </div>
+
+            {/* Floating accent cards */}
+            <div
+              className="absolute -bottom-4 -left-4 px-4 py-2.5 bg-white rounded-xl hidden lg:block"
+              style={{
+                border: '1px solid rgba(128,128,128,0.1)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
+              }}
+            >
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: `${accentColor}15` }}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: accentColor }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span className="text-sm font-medium text-[#1a1a1a]">
+                  {language === 'zh' ? '高效可靠' : 'Reliable'}
+                </span>
+              </div>
+            </div>
+
+            <div
+              className="absolute -top-4 -right-4 px-4 py-2.5 bg-white rounded-xl hidden lg:block"
+              style={{
+                border: '1px solid rgba(128,128,128,0.1)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
+              }}
+            >
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: `${primaryColor}15` }}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: primaryColor }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <span className="text-sm font-medium text-[#1a1a1a]">
+                  {language === 'zh' ? '创新科技' : 'Innovative'}
+                </span>
               </div>
             </div>
           </div>
