@@ -89,16 +89,11 @@ const Products = () => {
           <div className="p-6 sm:p-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex items-center gap-4">
-                <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center bg-white p-2"
-                  style={{ border: '1px solid rgba(0,0,0,0.08)' }}
-                >
-                  <img
-                    src="/vamerchant-logo.png"
-                    alt="VAMerchant Logo"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+                <img
+                  src="/vamerchant-logo.png"
+                  alt="VAMerchant Logo"
+                  className="w-14 h-14 object-contain rounded-xl"
+                />
                 <div>
                   <div className="flex items-center gap-3">
                     <h3 className="text-2xl font-bold text-[#1a1a1a]">
