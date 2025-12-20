@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const CoreValues = () => {
+  const sectionRef = useRef(null)
+  const badgeRef = useRef(null)
+  const titleRef = useRef(null)
+  const descRef = useRef(null)
+  const valuesGridRef = useRef(null)
   const values = [
     {
       icon: (
@@ -76,31 +85,99 @@ const CoreValues = () => {
     },
   ]
 
+  // GSAP Animations
+  useEffect(() => {
+    if (!sectionRef.current) return
+
+    // Set initial states
+    gsap.set([badgeRef.current, titleRef.current, descRef.current], {
+      opacity: 0,
+      y: 20
+    })
+
+    if (valuesGridRef.current) {
+      const cards = valuesGridRef.current.querySelectorAll('[data-value-card]')
+      gsap.set(cards, {
+        opacity: 0,
+        y: 30
+      })
+    }
+
+    // Create animations triggered by scroll
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+        once: true
+      }
+    })
+
+    // Animate header
+    tl.to(badgeRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 0)
+
+    tl.to(titleRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power2.out'
+    }, 0.2)
+
+    tl.to(descRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 0.35)
+
+    // Animate value cards with stagger
+    if (valuesGridRef.current) {
+      const cards = valuesGridRef.current.querySelectorAll('[data-value-card]')
+      tl.to(cards, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+        stagger: 0.12
+      }, 0.5)
+    }
+
+    return () => {
+      tl.kill()
+    }
+  }, [])
+
   return (
-    <section id="values" className="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+    <section id="values" className="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden" ref={sectionRef}>
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#10B981] rounded-full filter blur-3xl opacity-5"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#2563EB] rounded-full filter blur-3xl opacity-5"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#2563EB]/10 to-[#10B981]/10 rounded-full mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#2563EB]/10 to-[#10B981]/10 rounded-full mb-6" ref={badgeRef}>
             <span className="text-sm font-semibold text-[#2563EB]">Core Values</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4" ref={titleRef}>
             <span className="text-[#1E3A8A]">核心</span>
             <span className="text-[#10B981]">价值</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed" ref={descRef}>
             我们坚守的理念与承诺，驱动我们不断前进
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" ref={valuesGridRef}>
           {values.map((value, index) => (
             <div
               key={index}
               className={`group ${value.bgColor} ${value.borderColor} border-2 p-8 rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-2`}
+              data-value-card
             >
               <div
                 className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"

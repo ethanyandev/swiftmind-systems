@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useLanguage } from '../contexts/LanguageContext'
 import { useTheme } from '../contexts/ThemeContext'
 import { t } from '../translations'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Products = () => {
   const { language } = useLanguage()
@@ -10,6 +14,15 @@ const Products = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [bookingIndex, setBookingIndex] = useState(0)
   const [lightboxImage, setLightboxImage] = useState(null)
+
+  // Refs for animations
+  const sectionRef = useRef(null)
+  const headerRef = useRef(null)
+  const badgeRef = useRef(null)
+  const titleRef = useRef(null)
+  const subtitleRef = useRef(null)
+  const productCardRef = useRef(null)
+  const featuresContainerRef = useRef(null)
 
   const primaryColor = getThemeColor('#6366F1')
   const accentColor = getThemeColor('#10B981')
@@ -41,6 +54,86 @@ const Products = () => {
     return () => clearInterval(timer)
   }, [bookingImages.length])
 
+  // GSAP Animations
+  useEffect(() => {
+    if (!sectionRef.current) return
+
+    // Set initial states
+    gsap.set([badgeRef.current, titleRef.current, subtitleRef.current], {
+      opacity: 0,
+      y: 20
+    })
+
+    gsap.set(productCardRef.current, {
+      opacity: 0,
+      y: 30
+    })
+
+    if (featuresContainerRef.current) {
+      const features = featuresContainerRef.current.querySelectorAll('[data-feature]')
+      gsap.set(features, {
+        opacity: 0,
+        y: 20
+      })
+    }
+
+    // Create animations triggered by scroll
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+        once: true
+      }
+    })
+
+    // Animate header elements
+    tl.to(badgeRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 0)
+
+    tl.to(titleRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power2.out'
+    }, 0.2)
+
+    tl.to(subtitleRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 0.35)
+
+    // Animate product card
+    tl.to(productCardRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power2.out'
+    }, 0.5)
+
+    // Animate features with stagger
+    if (featuresContainerRef.current) {
+      const features = featuresContainerRef.current.querySelectorAll('[data-feature]')
+      tl.to(features, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+        stagger: 0.08
+      }, 0.7)
+    }
+
+    return () => {
+      tl.kill()
+    }
+  }, [])
+
   const goToPrev = () => {
     setCurrentIndex((prev) => (prev - 1 + overviewImages.length) % overviewImages.length)
     setIsAutoPlaying(false)
@@ -54,13 +147,14 @@ const Products = () => {
   }
 
   return (
-    <section id="products" className="py-20 bg-[#fafafa] transition-colors duration-300">
+    <section id="products" className="py-20 bg-[#fafafa] transition-colors duration-300" ref={sectionRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12" ref={headerRef}>
           <div
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4"
             style={{ backgroundColor: `${primaryColor}10` }}
+            ref={badgeRef}
           >
             <span
               className="text-xs font-semibold tracking-wide"
@@ -69,11 +163,11 @@ const Products = () => {
               {t('products.badge', language)}
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 tracking-tight" ref={titleRef}>
             <span className="text-[#1a1a1a]">{t('products.title1', language)}</span>
             <span style={{ color: primaryColor }}>{t('products.title2', language)}</span>
           </h2>
-          <p className="text-lg text-[#666] max-w-2xl mx-auto">
+          <p className="text-lg text-[#666] max-w-2xl mx-auto" ref={subtitleRef}>
             {t('products.subtitle', language)}
           </p>
         </div>
@@ -85,6 +179,7 @@ const Products = () => {
             border: '1px solid rgba(128,128,128,0.1)',
             boxShadow: '0 4px 20px rgba(0,0,0,0.04)'
           }}
+          ref={productCardRef}
         >
           <div className="p-6 sm:p-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -175,6 +270,7 @@ const Products = () => {
         <div
           className="bg-white rounded-xl p-6 mb-8"
           style={{ border: '1px solid rgba(128,128,128,0.1)' }}
+          ref={featuresContainerRef}
         >
           <h4 className="text-sm font-semibold text-[#888] uppercase tracking-wider mb-4">
             {t('products.coreFeatures', language)}
@@ -185,6 +281,7 @@ const Products = () => {
                 key={i}
                 className="flex items-center gap-2 px-3 py-2.5 rounded-lg bg-[#fafafa]"
                 style={{ border: '1px solid rgba(128,128,128,0.08)' }}
+                data-feature
               >
                 <svg
                   className="w-4 h-4 flex-shrink-0"

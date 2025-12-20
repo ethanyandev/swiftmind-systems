@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useLanguage } from '../contexts/LanguageContext'
 import { useTheme } from '../contexts/ThemeContext'
 import { t } from '../translations'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Footer = () => {
   const { language } = useLanguage()
   const { getThemeColor } = useTheme()
   const currentYear = new Date().getFullYear()
+
+  // Refs for animations
+  const footerRef = useRef(null)
+  const companyInfoRef = useRef(null)
+  const columnsRef = useRef(null)
+  const bottomBarRef = useRef(null)
 
   const primaryColor = getThemeColor('#6366F1')
 
@@ -46,12 +56,88 @@ const Footer = () => {
     },
   ]
 
+  // GSAP Animations
+  useEffect(() => {
+    if (!footerRef.current) return
+
+    // Set initial states
+    gsap.set(companyInfoRef.current, {
+      opacity: 0,
+      y: 20
+    })
+
+    gsap.set(columnsRef.current.querySelectorAll('[data-footer-column]'), {
+      opacity: 0,
+      y: 20
+    })
+
+    gsap.set(columnsRef.current.querySelectorAll('[data-footer-link]'), {
+      opacity: 0,
+      y: 10
+    })
+
+    gsap.set(bottomBarRef.current, {
+      opacity: 0,
+      y: 15
+    })
+
+    // Create animations triggered by scroll
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: footerRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+        once: true
+      }
+    })
+
+    // Animate company info
+    tl.to(companyInfoRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 0)
+
+    // Animate column headings
+    const columns = columnsRef.current.querySelectorAll('[data-footer-column]')
+    tl.to(columns, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out',
+      stagger: 0.1
+    }, 0.2)
+
+    // Animate links
+    const links = columnsRef.current.querySelectorAll('[data-footer-link]')
+    tl.to(links, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+      stagger: 0.05
+    }, 0.5)
+
+    // Animate bottom bar
+    tl.to(bottomBarRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 0.8)
+
+    return () => {
+      tl.kill()
+    }
+  }, [])
+
   return (
-    <footer className="bg-[#fafafa] border-t border-[rgba(128,128,128,0.1)] transition-colors duration-300">
+    <footer className="bg-[#fafafa] border-t border-[rgba(128,128,128,0.1)] transition-colors duration-300" ref={footerRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10" ref={columnsRef}>
           {/* Company Info */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-2" ref={companyInfoRef}>
             <div className="flex items-center gap-3 mb-4">
               <div className="h-10 w-10 flex items-center justify-center">
                 <img src="/logo-transparent.png" alt="SwiftMind Systems" className="h-full w-full object-contain" />
@@ -91,11 +177,11 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div data-footer-column>
             <h4 className="text-sm font-semibold text-[#1a1a1a] mb-4">{t('footer.quickLinks', language)}</h4>
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
-                <li key={link.href}>
+                <li key={link.href} data-footer-link>
                   <a
                     href={link.href}
                     className="text-sm text-[#666] transition-colors flex items-center group"
@@ -113,10 +199,10 @@ const Footer = () => {
           </div>
 
           {/* Contact */}
-          <div>
+          <div data-footer-column>
             <h4 className="text-sm font-semibold text-[#1a1a1a] mb-4">{t('footer.contact', language)}</h4>
             <ul className="space-y-3">
-              <li className="flex items-start">
+              <li className="flex items-start" data-footer-link>
                 <svg className="w-4 h-4 mr-2.5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: primaryColor }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
@@ -129,13 +215,13 @@ const Footer = () => {
                   info@swiftmindsystems.com
                 </a>
               </li>
-              <li className="flex items-start">
+              <li className="flex items-start" data-footer-link>
                 <svg className="w-4 h-4 mr-2.5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: primaryColor }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
                 <span className="text-sm text-[#666]">+1 (250) 686-9867</span>
               </li>
-              <li className="flex items-start">
+              <li className="flex items-start" data-footer-link>
                 <svg className="w-4 h-4 mr-2.5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: primaryColor }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -147,7 +233,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-[rgba(128,128,128,0.1)]">
+        <div className="pt-6 border-t border-[rgba(128,128,128,0.1)]" ref={bottomBarRef}>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-[#888]">
               &copy; {currentYear} {t('footer.companyName', language)}. {t('footer.copyright', language)}.

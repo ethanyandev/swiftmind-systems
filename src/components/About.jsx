@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import ScrollTrigger from 'gsap/ScrollTrigger'
 import { useLanguage } from '../contexts/LanguageContext'
 import { useTheme } from '../contexts/ThemeContext'
 import { t } from '../translations'
 
+gsap.registerPlugin(ScrollTrigger)
+
 const About = () => {
   const { language } = useLanguage()
   const { getThemeColor, isMonochrome } = useTheme()
+
+  // Refs for animations
+  const sectionRef = useRef(null)
+  const badgeRef = useRef(null)
+  const titleRef = useRef(null)
+  const descRef = useRef(null)
+  const valuesRef = useRef(null)
 
   const primaryColor = getThemeColor('#6366F1')
   const accentColor = getThemeColor('#10B981')
@@ -45,21 +56,77 @@ const About = () => {
     },
   ]
 
-  const stats = [
-    { value: '3+', key: 'about.stats.projects' },
-    { value: '100%', key: 'about.stats.satisfaction' },
-    { value: '24/7', key: 'about.stats.support' },
-    { value: '∞', key: 'about.stats.innovation' },
-  ]
+  // GSAP Animations
+  useEffect(() => {
+    if (!sectionRef.current) return
+
+    // Set initial states
+    gsap.set([badgeRef.current, titleRef.current, descRef.current], {
+      opacity: 0,
+      y: 20
+    })
+
+    gsap.set(valuesRef.current.querySelectorAll('[data-value]'), {
+      opacity: 0,
+      y: 20
+    })
+
+    // Create animations triggered by scroll
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top 80%',
+        toggleActions: 'play none none none',
+        once: true
+      }
+    })
+
+    // Animate header
+    tl.to(badgeRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 0)
+
+    tl.to(titleRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: 'power2.out'
+    }, 0.2)
+
+    tl.to(descRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 0.35)
+
+    // Animate value cards
+    const valueCards = valuesRef.current.querySelectorAll('[data-value]')
+    tl.to(valueCards, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power2.out',
+      stagger: 0.1
+    }, 0.5)
+
+    return () => {
+      tl.kill()
+    }
+  }, [])
 
   return (
-    <section id="about" className="py-20 bg-white transition-colors duration-300">
+    <section id="about" className="py-20 bg-white transition-colors duration-300" ref={sectionRef}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
           <div
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4"
             style={{ backgroundColor: `${primaryColor}10` }}
+            ref={badgeRef}
           >
             <span
               className="text-xs font-semibold tracking-wide"
@@ -68,22 +135,23 @@ const About = () => {
               {language === 'zh' ? '关于我们' : 'About Us'}
             </span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 tracking-tight" ref={titleRef}>
             <span className="text-[#1a1a1a]">{t('about.title1', language)}</span>
             <span style={{ color: primaryColor }}>{t('about.title2', language)}</span>
           </h2>
-          <p className="text-lg text-[#666] max-w-2xl mx-auto">
+          <p className="text-lg text-[#666] max-w-2xl mx-auto" ref={descRef}>
             {t('about.description', language)}
           </p>
         </div>
 
         {/* Core Values Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14" ref={valuesRef}>
           {values.map((item, index) => (
             <div
               key={index}
               className="text-center p-6 rounded-xl bg-[#fafafa] hover:bg-white transition-colors duration-200"
               style={{ border: '1px solid rgba(128,128,128,0.1)' }}
+              data-value
             >
               <div
                 className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 mx-auto"
@@ -102,30 +170,6 @@ const About = () => {
               </p>
             </div>
           ))}
-        </div>
-
-        {/* Stats */}
-        <div
-          className="rounded-xl p-8"
-          style={{
-            border: '1px solid rgba(128,128,128,0.1)',
-            background: isMonochrome
-              ? 'linear-gradient(135deg, rgba(26,26,26,0.03) 0%, rgba(26,26,26,0.02) 100%)'
-              : 'linear-gradient(135deg, rgba(99,102,241,0.03) 0%, rgba(16,185,129,0.03) 100%)'
-          }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-[#1a1a1a] mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-[#888]">
-                  {t(stat.key, language)}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

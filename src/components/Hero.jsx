@@ -1,201 +1,289 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import gsap from 'gsap'
 import { useLanguage } from '../contexts/LanguageContext'
 import { useTheme } from '../contexts/ThemeContext'
 import { t } from '../translations'
 
 const Hero = () => {
+  console.log('Hero component is being rendered')
+
   const { language } = useLanguage()
   const { getThemeColor, isMonochrome } = useTheme()
+
+  const badgeRef = useRef(null)
+  const title1Ref = useRef(null)
+  const title2Ref = useRef(null)
+  const descriptionRef = useRef(null)
+  const buttonsRef = useRef(null)
+  const visualRef = useRef(null)
+  const floatingCard1Ref = useRef(null)
+  const floatingCard2Ref = useRef(null)
+  const bgBlob1Ref = useRef(null)
+  const bgBlob2Ref = useRef(null)
 
   const primaryColor = getThemeColor('#6366F1')
   const accentColor = getThemeColor('#10B981')
 
+  useEffect(() => {
+    console.log('useEffect running, checking refs...')
+    console.log('badgeRef:', badgeRef.current)
+    console.log('title1Ref:', title1Ref.current)
+    console.log('title2Ref:', title2Ref.current)
+    console.log('descriptionRef:', descriptionRef.current)
+    console.log('buttonsRef:', buttonsRef.current)
+    console.log('visualRef:', visualRef.current)
+
+    if (!badgeRef.current || !title1Ref.current || !title2Ref.current || !descriptionRef.current ||
+        !buttonsRef.current || !visualRef.current) {
+      console.log('Some refs not ready, returning')
+      return
+    }
+
+    let tl = null
+    try {
+      console.log('Creating GSAP timeline...')
+
+      // Set initial states for animations
+      gsap.set(badgeRef.current, {
+        opacity: 0,
+        y: 20,
+        scale: 0.8
+      })
+
+      gsap.set(title1Ref.current, {
+        opacity: 0,
+        x: -40
+      })
+
+      gsap.set(title2Ref.current, {
+        opacity: 0,
+        x: 40
+      })
+
+      gsap.set(descriptionRef.current, {
+        opacity: 0,
+        y: 20
+      })
+
+      gsap.set(buttonsRef.current.querySelectorAll('a'), {
+        opacity: 0,
+        y: 30,
+        scale: 0.9
+      })
+
+      gsap.set(visualRef.current, {
+        opacity: 0,
+        scale: 0.95
+      })
+
+      if (floatingCard1Ref.current) {
+        gsap.set(floatingCard1Ref.current, {
+          opacity: 0,
+          x: -60,
+          y: 60,
+          scale: 0.8
+        })
+      }
+
+      if (floatingCard2Ref.current) {
+        gsap.set(floatingCard2Ref.current, {
+          opacity: 0,
+          x: 60,
+          y: -60,
+          scale: 0.8
+        })
+      }
+
+      tl = gsap.timeline()
+
+      if (bgBlob1Ref.current) {
+        gsap.to(bgBlob1Ref.current, {
+          duration: 20,
+          y: 40,
+          x: 30,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        })
+      }
+
+      if (bgBlob2Ref.current) {
+        gsap.to(bgBlob2Ref.current, {
+          duration: 25,
+          y: -40,
+          x: -30,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        })
+      }
+
+      tl.to(badgeRef.current, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.6,
+        ease: 'back.out'
+      }, 0)
+
+      tl.to(title1Ref.current, {
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      }, 0.2)
+
+      tl.to(title2Ref.current, {
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      }, 0.3)
+
+      tl.to(descriptionRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 0.5)
+
+      const buttons = buttonsRef.current.querySelectorAll('a')
+      if (buttons.length > 0) {
+        tl.to(buttons, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.5,
+          ease: 'back.out',
+          stagger: 0.1
+        }, 0.7)
+      }
+
+      tl.to(visualRef.current, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power2.out'
+      }, 0.3)
+
+      if (floatingCard1Ref.current) {
+        tl.to(floatingCard1Ref.current, {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: 'back.out'
+        }, 0.6)
+
+        gsap.to(floatingCard1Ref.current, {
+          duration: 4,
+          y: -8,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        })
+      }
+
+      if (floatingCard2Ref.current) {
+        tl.to(floatingCard2Ref.current, {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: 'back.out'
+        }, 0.5)
+
+        gsap.to(floatingCard2Ref.current, {
+          duration: 4.5,
+          y: 8,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        })
+      }
+
+      console.log('GSAP animations created successfully')
+    } catch (error) {
+      console.error('Animation error:', error)
+    }
+
+    return () => {
+      if (tl) tl.kill()
+    }
+  }, [])
+
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center bg-white transition-colors duration-300">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#fafafa] to-white"></div>
+    <section id="home" style={{ position: 'relative', minHeight: '70vh', display: 'flex', alignItems: 'center', backgroundColor: 'white', overflow: 'hidden', paddingTop: '60px' }}>
+      {/* Background gradient */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(to bottom, #fafafa, white)', zIndex: 0 }} />
 
-      {/* Subtle decorative element */}
-      <div
-        className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full blur-3xl"
-        style={{ backgroundColor: `${primaryColor}08` }}
-      ></div>
-      <div
-        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-3xl"
-        style={{ backgroundColor: `${accentColor}08` }}
-      ></div>
+      {/* Blob 1 */}
+      <div ref={bgBlob1Ref} style={{ position: 'absolute', top: '80px', right: 0, width: '500px', height: '500px', borderRadius: '50%', filter: 'blur(48px)', backgroundColor: `${primaryColor}08`, zIndex: 1, pointerEvents: 'none' }} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Column - Text Content */}
-          <div>
-            {/* Badge */}
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
-              style={{ backgroundColor: `${primaryColor}10` }}
-            >
-              <div
-                className="w-1.5 h-1.5 rounded-full"
-                style={{ backgroundColor: primaryColor }}
-              ></div>
-              <span
-                className="text-xs font-semibold tracking-wide"
-                style={{ color: primaryColor }}
-              >
-                {t('hero.badge', language)}
-              </span>
-            </div>
+      {/* Blob 2 */}
+      <div ref={bgBlob2Ref} style={{ position: 'absolute', bottom: 0, left: 0, width: '400px', height: '400px', borderRadius: '50%', filter: 'blur(48px)', backgroundColor: `${accentColor}08`, zIndex: 1, pointerEvents: 'none' }} />
 
-            {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-[1.1] tracking-tight">
-              <span className="text-[#1a1a1a]">{t('hero.title1', language)}</span>
-              <br />
-              <span style={{ color: primaryColor }}>{t('hero.title2', language)}</span>
-            </h1>
-
-            {/* Description */}
-            <p className="text-lg text-[#666] mb-8 leading-relaxed max-w-lg">
-              {t('hero.description', language)}
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3">
-              <a
-                href="#products"
-                className="inline-flex items-center justify-center px-6 py-3 text-white rounded-lg font-semibold text-sm transition-colors duration-200"
-                style={{
-                  backgroundColor: primaryColor,
-                  boxShadow: isMonochrome ? '0 2px 8px rgba(26,26,26,0.25)' : '0 2px 8px rgba(99,102,241,0.25)'
-                }}
-              >
-                <span>{t('hero.exploreProducts', language)}</span>
-                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </a>
-              <a
-                href="#about"
-                className="inline-flex items-center justify-center px-6 py-3 bg-white text-[#666] rounded-lg font-semibold text-sm border border-[rgba(0,0,0,0.12)] hover:text-[#1a1a1a] transition-colors duration-200"
-                style={{
-                  '--hover-border-color': primaryColor,
-                  '--hover-text-color': primaryColor
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.borderColor = primaryColor
-                  e.target.style.color = primaryColor
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.borderColor = 'rgba(0,0,0,0.12)'
-                  e.target.style.color = '#666'
-                }}
-              >
-                {t('hero.learnMore', language)}
-              </a>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-[rgba(0,0,0,0.06)]">
-              <div>
-                <div className="text-2xl sm:text-3xl font-bold text-[#1a1a1a] mb-1">3+</div>
-                <div className="text-xs sm:text-sm text-[#888]">{t('hero.stats.products', language)}</div>
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl font-bold text-[#1a1a1a] mb-1">100%</div>
-                <div className="text-xs sm:text-sm text-[#888]">{t('hero.stats.satisfaction', language)}</div>
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl font-bold text-[#1a1a1a] mb-1">24/7</div>
-                <div className="text-xs sm:text-sm text-[#888]">{t('hero.stats.support', language)}</div>
-              </div>
-            </div>
+      {/* Main content container */}
+      <div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: '1280px', margin: '0 auto', padding: '20px 20px 40px 20px' }}>
+        {/* Left column */}
+        <div style={{ marginBottom: '40px' }}>
+          {/* Badge */}
+          <div ref={badgeRef} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 12px', borderRadius: '9999px', marginBottom: '24px', backgroundColor: `${primaryColor}10` }}>
+            <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: primaryColor }} />
+            <span style={{ fontSize: '12px', fontWeight: '600', color: primaryColor }}>
+              {t('hero.badge', language)}
+            </span>
           </div>
 
-          {/* Right Column - Visual Content */}
-          <div className="relative">
-            <div
-              className="relative bg-white rounded-2xl overflow-hidden"
-              style={{
-                border: '1px solid rgba(128,128,128,0.1)',
-                boxShadow: '0 4px 24px rgba(0,0,0,0.06)'
-              }}
-            >
-              <div className="aspect-video relative">
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#fafafa] to-white p-8">
-                  <div className="text-center">
-                    <div
-                      className="w-20 h-20 mx-auto mb-5 rounded-2xl flex items-center justify-center"
-                      style={{
-                        background: isMonochrome
-                          ? 'linear-gradient(135deg, rgba(26,26,26,0.1) 0%, rgba(26,26,26,0.05) 100%)'
-                          : 'linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(16,185,129,0.1) 100%)',
-                        border: `1px solid ${primaryColor}25`
-                      }}
-                    >
-                      <svg
-                        className="w-10 h-10"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        style={{ color: primaryColor }}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-                    <p className="text-[#1a1a1a] font-semibold text-lg mb-1">
-                      {t('hero.visualTitle', language)}
-                    </p>
-                    <p className="text-[#888] text-sm">
-                      {t('hero.visualSubtitle', language)}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Title */}
+          <h1 style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '24px', lineHeight: '1.2' }}>
+            <span ref={title1Ref} style={{ color: '#1a1a1a' }}>{t('hero.title1', language)}</span>
+            <br />
+            <span ref={title2Ref} style={{ color: primaryColor }}>{t('hero.title2', language)}</span>
+          </h1>
 
-            {/* Floating accent cards */}
-            <div
-              className="absolute -bottom-4 -left-4 px-4 py-2.5 bg-white rounded-xl hidden lg:block"
-              style={{
-                border: '1px solid rgba(128,128,128,0.1)',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
-              }}
-            >
-              <div className="flex items-center gap-2">
-                <div
-                  className="w-8 h-8 rounded-lg flex items-center justify-center"
-                  style={{ backgroundColor: `${accentColor}15` }}
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: accentColor }}>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <span className="text-sm font-medium text-[#1a1a1a]">
-                  {language === 'zh' ? '高效可靠' : 'Reliable'}
-                </span>
-              </div>
-            </div>
+          {/* Description */}
+          <p ref={descriptionRef} style={{ fontSize: '18px', color: '#666', marginBottom: '32px', lineHeight: '1.6', maxWidth: '500px' }}>
+            {t('hero.description', language)}
+          </p>
 
-            <div
-              className="absolute -top-4 -right-4 px-4 py-2.5 bg-white rounded-xl hidden lg:block"
-              style={{
-                border: '1px solid rgba(128,128,128,0.1)',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.1)'
-              }}
-            >
-              <div className="flex items-center gap-2">
-                <div
-                  className="w-8 h-8 rounded-lg flex items-center justify-center"
-                  style={{ backgroundColor: `${primaryColor}15` }}
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: primaryColor }}>
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                </div>
-                <span className="text-sm font-medium text-[#1a1a1a]">
-                  {language === 'zh' ? '创新科技' : 'Innovative'}
-                </span>
-              </div>
+          {/* Buttons */}
+          <div ref={buttonsRef} style={{ display: 'flex', gap: '12px', marginBottom: '48px', flexWrap: 'wrap' }}>
+            <a href="#products" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', backgroundColor: primaryColor, color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '14px', cursor: 'pointer', transition: 'all 0.3s' }} onMouseEnter={(e) => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)'; }} onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none'; }}>
+              <span>{t('hero.exploreProducts', language)}</span>
+              <svg style={{ width: '16px', height: '16px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+            </a>
+            <a href="#about" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 24px', backgroundColor: 'white', color: '#666', borderRadius: '8px', border: '1px solid #ddd', textDecoration: 'none', fontWeight: '600', fontSize: '14px', cursor: 'pointer', transition: 'all 0.3s' }} onMouseEnter={(e) => { e.target.style.borderColor = primaryColor; e.target.style.color = primaryColor; e.target.style.transform = 'translateY(-2px)'; }} onMouseLeave={(e) => { e.target.style.borderColor = '#ddd'; e.target.style.color = '#666'; e.target.style.transform = 'translateY(0)'; }}>
+              {t('hero.learnMore', language)}
+            </a>
+          </div>
+        </div>
+
+        {/* Right column - Visual */}
+        <div style={{ marginTop: '40px' }}>
+          <div ref={visualRef} style={{ position: 'relative', backgroundColor: 'white', borderRadius: '16px', border: '1px solid #e5e5e5', boxShadow: '0 4px 24px rgba(0,0,0,0.06)', padding: '0', overflow: 'hidden' }}>
+            <img src="/VA/1.png" alt="Hero" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', aspectRatio: '16/9' }} />
+          </div>
+
+          {/* Floating cards */}
+          <div ref={floatingCard1Ref} style={{ position: 'absolute', bottom: '80px', left: '20px', padding: '12px 16px', backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e5e5e5', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: `${accentColor}10` }}>
+              <svg style={{ width: '16px', height: '16px', color: accentColor }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
             </div>
+            <span style={{ fontSize: '14px', fontWeight: '500', color: '#1a1a1a' }}>
+              {language === 'zh' ? '高效可靠' : 'Reliable'}
+            </span>
+          </div>
+
+          <div ref={floatingCard2Ref} style={{ position: 'absolute', top: '20px', right: '20px', padding: '12px 16px', backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e5e5e5', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: `${primaryColor}10` }}>
+              <svg style={{ width: '16px', height: '16px', color: primaryColor }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+            </div>
+            <span style={{ fontSize: '14px', fontWeight: '500', color: '#1a1a1a' }}>
+              {language === 'zh' ? '创新科技' : 'Innovative'}
+            </span>
           </div>
         </div>
       </div>
