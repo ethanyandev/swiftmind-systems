@@ -227,63 +227,100 @@ const Hero = () => {
 
       {/* Main content container */}
       <div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: '1280px', margin: '0 auto', padding: '20px 20px 40px 20px' }}>
-        {/* Left column */}
-        <div style={{ marginBottom: '40px' }}>
-          {/* Badge */}
-          <div ref={badgeRef} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 12px', borderRadius: '9999px', marginBottom: '24px', backgroundColor: `${primaryColor}10` }}>
-            <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: primaryColor }} />
-            <span style={{ fontSize: '12px', fontWeight: '600', color: primaryColor }}>
-              {t('hero.badge', language)}
-            </span>
-          </div>
-
-          {/* Title */}
-          <h1 style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '24px', lineHeight: '1.2' }}>
-            <span ref={title1Ref} style={{ color: '#1a1a1a' }}>{t('hero.title1', language)}</span>
-            <br />
-            <span ref={title2Ref} style={{ color: primaryColor }}>{t('hero.title2', language)}</span>
-          </h1>
-
-          {/* Description */}
-          <p ref={descriptionRef} style={{ fontSize: '18px', color: '#666', marginBottom: '32px', lineHeight: '1.6', maxWidth: '500px' }}>
-            {t('hero.description', language)}
-          </p>
-
-          {/* Buttons */}
-          <div ref={buttonsRef} style={{ display: 'flex', gap: '12px', marginBottom: '48px', flexWrap: 'wrap' }}>
-            <a href="#products" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', backgroundColor: primaryColor, color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '14px', cursor: 'pointer', transition: 'all 0.3s' }} onMouseEnter={(e) => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)'; }} onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none'; }}>
-              <span>{t('hero.exploreProducts', language)}</span>
-              <svg style={{ width: '16px', height: '16px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-            </a>
-            <a href="#about" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 24px', backgroundColor: 'white', color: '#666', borderRadius: '8px', border: '1px solid #ddd', textDecoration: 'none', fontWeight: '600', fontSize: '14px', cursor: 'pointer', transition: 'all 0.3s' }} onMouseEnter={(e) => { e.target.style.borderColor = primaryColor; e.target.style.color = primaryColor; e.target.style.transform = 'translateY(-2px)'; }} onMouseLeave={(e) => { e.target.style.borderColor = '#ddd'; e.target.style.color = '#666'; e.target.style.transform = 'translateY(0)'; }}>
-              {t('hero.learnMore', language)}
-            </a>
-          </div>
-        </div>
-
-        {/* Right column - Visual */}
-        <div style={{ marginTop: '40px' }}>
-          <div ref={visualRef} style={{ position: 'relative', backgroundColor: 'white', borderRadius: '16px', border: '1px solid #e5e5e5', boxShadow: '0 4px 24px rgba(0,0,0,0.06)', padding: '0', overflow: 'hidden' }}>
-            <img src="/VA/1.png" alt="Hero" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', aspectRatio: '16/9' }} />
-          </div>
-
-          {/* Floating cards */}
-          <div ref={floatingCard1Ref} style={{ position: 'absolute', bottom: '80px', left: '20px', padding: '12px 16px', backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e5e5e5', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: `${accentColor}10` }}>
-              <svg style={{ width: '16px', height: '16px', color: accentColor }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '40px' }}>
+          {/* Left column */}
+          <div style={{ flex: '1 1 500px', minWidth: '300px' }}>
+            {/* Badge */}
+            <div ref={badgeRef} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 12px', borderRadius: '9999px', marginBottom: '24px', backgroundColor: `${primaryColor}10` }}>
+              <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: primaryColor }} />
+              <span style={{ fontSize: '12px', fontWeight: '600', color: primaryColor }}>
+                {t('hero.badge', language)}
+              </span>
             </div>
-            <span style={{ fontSize: '14px', fontWeight: '500', color: '#1a1a1a' }}>
-              {language === 'zh' ? '高效可靠' : 'Reliable'}
-            </span>
+
+            {/* Title */}
+            <h1 style={{ fontSize: '48px', fontWeight: 'bold', marginBottom: '24px', lineHeight: '1.2' }}>
+              <span ref={title1Ref} style={{ color: '#1a1a1a' }}>{t('hero.title1', language)}</span>
+              <br />
+              <span ref={title2Ref} style={{ color: primaryColor }}>{t('hero.title2', language)}</span>
+            </h1>
+
+            {/* Description */}
+            <p ref={descriptionRef} style={{ fontSize: '18px', color: '#666', marginBottom: '32px', lineHeight: '1.6', maxWidth: '500px' }}>
+              {t('hero.description', language)}
+            </p>
+
+            {/* Buttons */}
+            <div ref={buttonsRef} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <a href="#products" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', backgroundColor: primaryColor, color: 'white', borderRadius: '8px', textDecoration: 'none', fontWeight: '600', fontSize: '14px', cursor: 'pointer', transition: 'all 0.3s' }} onMouseEnter={(e) => { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)'; }} onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none'; }}>
+                <span>{t('hero.exploreProducts', language)}</span>
+                <svg style={{ width: '16px', height: '16px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+              </a>
+              <a href="#about" style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 24px', backgroundColor: 'white', color: '#666', borderRadius: '8px', border: '1px solid #ddd', textDecoration: 'none', fontWeight: '600', fontSize: '14px', cursor: 'pointer', transition: 'all 0.3s' }} onMouseEnter={(e) => { e.target.style.borderColor = primaryColor; e.target.style.color = primaryColor; e.target.style.transform = 'translateY(-2px)'; }} onMouseLeave={(e) => { e.target.style.borderColor = '#ddd'; e.target.style.color = '#666'; e.target.style.transform = 'translateY(0)'; }}>
+                {t('hero.learnMore', language)}
+              </a>
+            </div>
           </div>
 
-          <div ref={floatingCard2Ref} style={{ position: 'absolute', top: '20px', right: '20px', padding: '12px 16px', backgroundColor: 'white', borderRadius: '12px', border: '1px solid #e5e5e5', boxShadow: '0 4px 16px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: `${primaryColor}10` }}>
-              <svg style={{ width: '16px', height: '16px', color: primaryColor }} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+          {/* Right column - Products showcase */}
+          <div ref={visualRef} style={{ flex: '1 1 400px', minWidth: '280px', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%', maxWidth: '380px' }}>
+              {/* VAMerchant */}
+              <a
+                href="#products"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '16px',
+                  padding: '20px 24px',
+                  backgroundColor: 'white',
+                  borderRadius: '16px',
+                  border: '1px solid #e5e5e5',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                  textDecoration: 'none',
+                  transition: 'all 0.3s'
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.1)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.06)'; }}
+              >
+                <img src="/vamerchant-logo.png" alt="VAMerchant" style={{ width: '56px', height: '56px', objectFit: 'contain', borderRadius: '12px' }} />
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontSize: '18px', fontWeight: '600', color: '#1a1a1a', marginBottom: '4px' }}>VAMerchant</div>
+                  <div style={{ fontSize: '13px', color: '#888' }}>{language === 'zh' ? '服务商预约管理系统' : 'Appointment Management'}</div>
+                </div>
+                <div style={{ padding: '4px 10px', backgroundColor: `${primaryColor}10`, borderRadius: '20px', fontSize: '11px', fontWeight: '600', color: primaryColor }}>
+                  {language === 'zh' ? '已上线' : 'Live'}
+                </div>
+              </a>
+
+              {/* SaveVia */}
+              <a
+                href="#savevia"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '16px',
+                  padding: '20px 24px',
+                  backgroundColor: 'white',
+                  borderRadius: '16px',
+                  border: '1px solid #e5e5e5',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                  textDecoration: 'none',
+                  transition: 'all 0.3s'
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 24px rgba(0,0,0,0.1)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.06)'; }}
+              >
+                <img src="/savevia-logo.png" alt="SaveVia" style={{ width: '56px', height: '56px', objectFit: 'contain', borderRadius: '12px' }} />
+                <div style={{ flex: 1 }}>
+                  <span style={{ fontSize: '18px', fontWeight: '600', marginBottom: '4px', background: 'linear-gradient(90deg, #2563eb 0%, #0d9488 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display: 'inline-block' }}>SaveVia</span>
+                  <div style={{ fontSize: '13px', color: '#888' }}>{language === 'zh' ? 'AI信用卡返现优化' : 'AI Cashback Optimizer'}</div>
+                </div>
+                <div style={{ padding: '4px 10px', backgroundColor: `${accentColor}10`, borderRadius: '20px', fontSize: '11px', fontWeight: '600', color: accentColor }}>
+                  {language === 'zh' ? '已上线' : 'Live'}
+                </div>
+              </a>
             </div>
-            <span style={{ fontSize: '14px', fontWeight: '500', color: '#1a1a1a' }}>
-              {language === 'zh' ? '创新科技' : 'Innovative'}
-            </span>
           </div>
         </div>
       </div>

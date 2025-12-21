@@ -149,12 +149,12 @@ const About = () => {
           {values.map((item, index) => (
             <div
               key={index}
-              className="text-center p-6 rounded-xl bg-[#fafafa] hover:bg-white transition-colors duration-200"
+              className="group text-center p-6 rounded-xl bg-[#fafafa] cursor-default transition-all duration-300 hover:-translate-y-2 hover:bg-white hover:shadow-xl"
               style={{ border: '1px solid rgba(128,128,128,0.1)' }}
               data-value
             >
               <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 mx-auto"
+                className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 mx-auto transition-transform duration-300 group-hover:scale-110"
                 style={{
                   backgroundColor: `${item.color}10`,
                   color: item.color
@@ -162,7 +162,7 @@ const About = () => {
               >
                 {item.icon}
               </div>
-              <h3 className="text-base font-semibold text-[#1a1a1a] mb-2">
+              <h3 className="text-base font-semibold text-[#1a1a1a] mb-2 transition-colors duration-300" style={{ '--hover-color': item.color }}>
                 {t(item.titleKey, language)}
               </h3>
               <p className="text-sm text-[#666] leading-relaxed">

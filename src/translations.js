@@ -78,6 +78,25 @@ export const translations = {
         feature4: { zh: '调酒教程', en: 'Mixology Tutorials' },
       }
     },
+    savevia: {
+      name: { zh: 'SaveVia', en: 'SaveVia' },
+      tagline: { zh: 'AI信用卡返现优化器', en: 'AI Credit Card Cashback Optimizer' },
+      description: {
+        zh: 'SaveVia帮助加拿大用户优化信用卡使用策略，通过AI智能分析消费习惯，为每个消费类别推荐最佳信用卡，每年可节省$300-$1,000。',
+        en: 'SaveVia helps Canadian users optimize credit card usage through AI-powered spending analysis, recommending the best card for each category to save $300-$1,000 annually.'
+      },
+      status: { zh: '已上线', en: 'Live' },
+      features: {
+        feature1: { zh: '智能卡片推荐', en: 'Smart Card Recommendations' },
+        feature2: { zh: '消费分析', en: 'Spending Analysis' },
+        feature3: { zh: '返现优化', en: 'Cashback Optimization' },
+        feature4: { zh: '多卡管理', en: 'Multi-Card Management' },
+        feature5: { zh: '交易追踪', en: 'Transaction Tracking' },
+        feature6: { zh: '银行连接', en: 'Bank Connection' },
+        feature7: { zh: '节省报告', en: 'Savings Report' },
+        feature8: { zh: 'AI优化建议', en: 'AI Optimization' },
+      }
+    },
     coreFeatures: { zh: '核心功能', en: 'Core Features' },
   },
   about: {
