@@ -64,7 +64,7 @@ export default function HeroDemo() {
           </p>
           <div {...at(3)} className={`demo-answer ${at(3).className ?? ''}`}>
             <div className="demo-card">
-              <img src={DEMO.card.image} alt="" width="160" height="103" />
+              <img src={DEMO.card.image} alt="" width="240" height="152" />
               <div>
                 <p className="demo-card-name">{DEMO.card.name[lang]}</p>
                 <p className="demo-card-meta mono">{DEMO.card.meta[lang]}</p>
@@ -89,12 +89,16 @@ export default function HeroDemo() {
           <ol>
             {DEMO.ranking.map((c, i) => (
               <li key={c.name} {...at(8 + i)} style={{ '--w': `${(c.value / max) * 100}%` }}>
-                <span className="demo-rank-name">{c.name}</span>
-                <span className="demo-rank-bar">
-                  <span />
-                </span>
-                <span className="demo-rank-value mono">
-                  {money(c.value)} <span className="faint">· {c.fee[lang]}</span>
+                <img className="demo-rank-art" src={c.image} alt="" width="240" height="152" />
+                <span className="demo-rank-body">
+                  <span className="demo-rank-head">
+                    <span className="demo-rank-name">{c.name}</span>
+                    <span className="demo-rank-value mono">{money(c.value)}</span>
+                  </span>
+                  <span className="demo-rank-bar">
+                    <span />
+                  </span>
+                  <span className="demo-rank-fee mono faint">{c.fee[lang]}</span>
                 </span>
               </li>
             ))}

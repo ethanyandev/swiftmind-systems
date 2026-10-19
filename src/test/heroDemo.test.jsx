@@ -37,6 +37,14 @@ test('the stage is a figure with a screen-reader caption and a hidden visual', a
   expect(fig.querySelector('.demo-card-name')).toHaveTextContent(DEMO.card.name.zh)
   expect(fig.querySelector('.demo-total')).toHaveTextContent('$438')
   expect(document.querySelector('canvas')).toBeNull()
+  const rows = fig.querySelectorAll('.demo-rank li')
+  expect(rows).toHaveLength(DEMO.ranking.length)
+  rows.forEach((li, i) => {
+    const img = li.querySelector('img.demo-rank-art')
+    expect(img).toHaveAttribute('src', DEMO.ranking[i].image)
+    expect(img.getAttribute('src')).toMatch(/^\/demo\/.+\.webp$/)
+    expect(li).toHaveTextContent(DEMO.ranking[i].name)
+  })
 })
 
 test('steps appear in order, hold, then the loop restarts', async () => {

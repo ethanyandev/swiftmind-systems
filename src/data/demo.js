@@ -1,5 +1,6 @@
 // Hero demo script: one real answer from Xiaowei, the assistant inside SaveVia 2.0.
 // Every number is quoted from the source capture below, not written for the site.
+// Card art comes from SaveVia's own card library (~/work/savevia/savevia/web/static/cards).
 // Kept out of translations.js on purpose: the copy rules ban prices and percentages in marketing text;
 // this is product output with a source.
 export const DEMO = {
@@ -13,7 +14,7 @@ export const DEMO = {
   card: {
     name: { zh: 'MBNA 智能现金白金 Plus 卡', en: 'MBNA Smart Cash Platinum Plus' },
     meta: { zh: 'Mastercard · 年费 $0', en: 'Mastercard · $0 annual fee' },
-    image: '/demo/mbna-card.webp',
+    image: '/demo/mbna.webp',
   },
   rows: [
     { label: { zh: '买菜前 $6,000 × 5%', en: 'Groceries, first $6,000 × 5%' }, value: 300 },
@@ -23,10 +24,10 @@ export const DEMO = {
   total: { label: { zh: '一年净拿', en: 'Net per year' }, value: 438 },
   rankingTitle: { zh: '同一份消费，四张卡一年净拿', en: 'Same spending, net per year on four cards' },
   ranking: [
-    { name: 'MBNA Smart Cash Platinum Plus', value: 438, fee: { zh: '免年费', en: 'No fee' } },
-    { name: 'Neo World Elite', value: 403, fee: { zh: '年费 $149', en: '$149 fee' } },
-    { name: 'CIBC Dividend Visa Infinite', value: 360, fee: { zh: '年费 $120', en: '$120 fee' } },
-    { name: 'Triangle World Elite', value: 312, fee: { zh: '免年费', en: 'No fee' } },
+    { name: 'MBNA Smart Cash Platinum Plus', image: '/demo/mbna.webp', value: 438, fee: { zh: '免年费', en: 'No fee' } },
+    { name: 'Neo World Elite', image: '/demo/neo.webp', value: 403, fee: { zh: '年费 $149', en: '$149 fee' } },
+    { name: 'CIBC Dividend Visa Infinite', image: '/demo/cibc.webp', value: 360, fee: { zh: '年费 $120', en: '$120 fee' } },
+    { name: 'Triangle World Elite', image: '/demo/triangle.webp', value: 312, fee: { zh: '免年费', en: 'No fee' } },
   ],
   caption: {
     zh: '演示：SaveVia 里的 AI 助手小维回答一个真实问题。它先查卡库，再按封顶逐项计算，最后给出四张卡的一年净收益排名，第一名是 MBNA 智能现金白金 Plus 卡，一年净拿约 438 加元。',
