@@ -43,7 +43,16 @@ export default function HeroEngine() {
       { threshold: 0 },
     )
 
-    import('three')
+    // Start after the page has loaded and the main thread is idle, so the first paint is never delayed by the engine.
+    const whenIdle = () =>
+      new Promise(resolve => {
+        const idle = () => (window.requestIdleCallback ? window.requestIdleCallback(resolve, { timeout: 1500 }) : setTimeout(resolve, 300))
+        if (document.readyState === 'complete') idle()
+        else window.addEventListener('load', idle, { once: true })
+      })
+
+    whenIdle()
+      .then(() => import('three'))
       .then(THREE => {
         if (cancelled) return
         try {

@@ -697,3 +697,9 @@ img {
     justify-content: space-between;
   }
 }
+
+@media (max-width: 767px) {
+  .product-row .shots {
+    order: -1;
+  }
+}

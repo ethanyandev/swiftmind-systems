@@ -2,7 +2,7 @@
 export const translations = {
   meta: {
     description: {
-      zh: 'SwiftMind Systems 是一家加拿大软件公司,自己设计、开发并上线 AI 产品。',
+      zh: 'SwiftMind Systems 是一家加拿大软件公司，自己设计、开发并上线 AI 产品。',
       en: 'SwiftMind Systems is a Canadian software company that designs, builds and ships its own AI products.',
     },
   },
@@ -19,7 +19,7 @@ export const translations = {
   hero: {
     title: { zh: '我们把 AI 做成能用的产品。', en: 'We turn AI into products people actually use.' },
     subtitle: {
-      zh: '加拿大的小团队,自己设计、自己写、自己上线。',
+      zh: '加拿大的小团队，自己设计、自己写、自己上线。',
       en: 'A small team in Canada that designs, builds and ships its own products.',
     },
     cta: { zh: '看产品', en: 'See products' },
@@ -29,7 +29,7 @@ export const translations = {
   manifesto: {
     eyebrow: { zh: '我们怎么做事', en: 'How we work' },
     body: {
-      zh: '我们不做幻灯片里的 AI。每一个产品都从一个真实的麻烦开始,用模型和代码把它解决掉,然后交到用户手里。能上线的,才算数。',
+      zh: '我们不做幻灯片里的 AI。每一个产品都从一个真实的麻烦开始，用模型和代码把它解决掉，然后交到用户手里。能上线的，才算数。',
       en: "We don't build AI for slide decks. Every product starts with a real annoyance, gets solved with models and code, and goes into users' hands. If it doesn't ship, it doesn't count.",
     },
   },
@@ -50,7 +50,7 @@ export const translations = {
       name: { zh: 'SaveVia', en: 'SaveVia' },
       tagline: { zh: '加拿大信用卡情报站', en: 'Credit card intelligence for Canada' },
       description: {
-        zh: '把各家银行的信用卡条款、返现和开卡奖励抓下来、读懂、放进一张表里,再让 AI 助手小维根据你的消费结构告诉你该刷哪张。',
+        zh: '把各家银行的信用卡条款、返现和开卡奖励抓下来、读懂、放进一张表里，再让 AI 助手小维根据你的消费结构告诉你该刷哪张。',
         en: "Pulls every Canadian bank's card terms, cashback rates and welcome offers into one place, then lets Xiaowei, the AI assistant, tell you which card to use based on how you spend.",
       },
       features: {
@@ -64,7 +64,7 @@ export const translations = {
       name: { zh: 'Moodtini', en: 'Moodtini' },
       tagline: { zh: '按心情推荐鸡尾酒的 AI', en: 'Mood-based AI cocktail picks' },
       description: {
-        zh: '告诉它你现在的心情和场合,它从配方库里挑一杯最合适的,附调法。',
+        zh: '告诉它你现在的心情和场合，它从配方库里挑一杯最合适的，附调法。',
         en: 'Tell it your mood and the occasion; it picks a cocktail from the recipe library and shows you how to make it.',
       },
       features: {
@@ -85,13 +85,13 @@ export const translations = {
   about: {
     heading: { zh: '关于', en: 'About' },
     body: {
-      zh: 'SwiftMind Systems 是一家在加拿大注册的软件公司。我们自己出产品,也接少量定制开发;从需求、设计、后端、前端到上线,一条线做完。擅长的方向是把大模型接进真实业务:数据抓取与结构化、对话助手、推荐系统。',
+      zh: 'SwiftMind Systems 是一家在加拿大注册的软件公司。我们自己出产品，也接少量定制开发；从需求、设计、后端、前端到上线，一条线做完。擅长的方向是把大模型接进真实业务：数据抓取与结构化、对话助手、推荐系统。',
       en: 'SwiftMind Systems is a software company registered in Canada. We build our own products and take on a small amount of custom work, covering the whole line from requirements and design to backend, frontend and launch. Our strength is wiring large language models into real workflows: data extraction and structuring, conversational assistants, recommendation systems.',
     },
     principles: {
-      p1: { zh: '先上线,再打磨。', en: 'Ship first, then polish.' },
+      p1: { zh: '先上线，再打磨。', en: 'Ship first, then polish.' },
       p2: { zh: '数字必须有来源。', en: 'Every number has a source.' },
-      p3: { zh: '代码自己写,不转包。', en: 'We write the code ourselves.' },
+      p3: { zh: '代码自己写，不转包。', en: 'We write the code ourselves.' },
     },
     line: {
       zh: 'SwiftMind Systems Ltd. · Canada · info@swiftmindsystems.com',
@@ -99,7 +99,7 @@ export const translations = {
     },
   },
   contact: {
-    heading: { zh: '有想法?聊聊。', en: "Have an idea? Let's talk." },
+    heading: { zh: '有想法？聊聊。', en: "Have an idea? Let's talk." },
     cta: { zh: '发邮件', en: 'Email us' },
     email: { zh: 'info@swiftmindsystems.com', en: 'info@swiftmindsystems.com' },
   },
@@ -110,7 +110,7 @@ export const translations = {
     savevia: { zh: 'savevia.app', en: 'savevia.app' },
   },
   legal: {
-    draft: { zh: '初稿,待审定', en: 'Draft, pending review' },
+    draft: { zh: '初稿，待审定', en: 'Draft, pending review' },
   },
 }
 

@@ -15,11 +15,11 @@ function LangToggle({ language, setLanguage, onPick }) {
   }
   return (
     <div className="lang-toggle mono" data-lang-toggle role="group" aria-label={t('nav.lang', language)}>
-      <button type="button" aria-label="Chinese" aria-pressed={language === 'zh'} onClick={() => pick('zh')}>
+      <button type="button" aria-label="中 Chinese" aria-pressed={language === 'zh'} onClick={() => pick('zh')}>
         中
       </button>
       <span aria-hidden="true">/</span>
-      <button type="button" aria-label="English" aria-pressed={language === 'en'} onClick={() => pick('en')}>
+      <button type="button" aria-label="EN English" aria-pressed={language === 'en'} onClick={() => pick('en')}>
         EN
       </button>
     </div>

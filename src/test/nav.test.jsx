@@ -17,8 +17,8 @@ test('renders wordmark and the three section anchors', () => {
 test('language toggle marks the active language and switches copy', async () => {
   const user = userEvent.setup()
   renderWithProviders(<Nav />)
-  const zh = screen.getAllByRole('button', { name: 'Chinese' })[0]
-  const en = screen.getAllByRole('button', { name: 'English' })[0]
+  const zh = screen.getAllByRole('button', { name: /Chinese/ })[0]
+  const en = screen.getAllByRole('button', { name: /English/ })[0]
   expect(zh).toHaveAttribute('aria-pressed', 'true')
   expect(en).toHaveAttribute('aria-pressed', 'false')
   await user.click(en)

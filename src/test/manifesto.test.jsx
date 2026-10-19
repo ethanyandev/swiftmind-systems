@@ -7,9 +7,9 @@ import { translations } from '../translations'
 beforeEach(() => localStorage.clear())
 
 test('splitWords splits chinese per character and round-trips', () => {
-  const parts = splitWords('能上线的,才算数。', 'zh')
-  expect(parts.length).toBe('能上线的,才算数。'.length)
-  expect(parts.join('')).toBe('能上线的,才算数。')
+  const parts = splitWords('能上线的，才算数。', 'zh')
+  expect(parts.length).toBe('能上线的，才算数。'.length)
+  expect(parts.join('')).toBe('能上线的，才算数。')
 })
 
 test('splitWords splits english on whitespace', () => {
