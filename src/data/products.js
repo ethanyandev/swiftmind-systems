@@ -6,6 +6,7 @@ export const PRODUCTS = [
     slug: 'savevia',
     status: STATUS.live,
     order: 1,
+    palette: 'ember',
     links: [
       { kind: 'web', href: 'https://savevia.app' },
       { kind: 'appstore', href: 'https://apps.apple.com/ca/app/id6756332569' },
@@ -19,6 +20,7 @@ export const PRODUCTS = [
     slug: 'moodtini',
     status: STATUS.development,
     order: 2,
+    palette: 'lilac',
     links: [],
     screens: [{ src: '/screens/moodtini-1.webp', w: 1600, h: 1008 }],
   },

@@ -36,6 +36,10 @@ export const translations = {
   },
   products: {
     heading: { zh: '产品', en: 'Products' },
+    intro: {
+      zh: '两个在做的产品，一个已上线，一个在开发。下面还列了过去做过的。',
+      en: 'Two products in progress: one live, one in development. Past work is listed below.',
+    },
     archiveHeading: { zh: '过去的产品', en: 'Archive' },
     status: {
       live: { zh: '已上线', en: 'Live' },
