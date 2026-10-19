@@ -3,6 +3,7 @@ import { LanguageProvider } from './contexts/LanguageContext'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Manifesto from './components/Manifesto'
+import Products from './components/Products'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <main id="main">
         <Hero />
         <Manifesto />
+        <Products />
       </main>
       <div id="app" />
     </LanguageProvider>

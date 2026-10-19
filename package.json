@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "capture:hero": "node scripts/capture-hero.mjs"
+    "capture:hero": "node scripts/capture-hero.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.16",

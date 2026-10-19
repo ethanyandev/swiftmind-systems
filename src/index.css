@@ -453,3 +453,150 @@ img {
     padding-top: 0.6em;
   }
 }
+
+/* ---------- Products ---------- */
+.section-title {
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  margin: 0 0 clamp(2rem, 5vw, 4rem);
+}
+
+.product-row {
+  display: grid;
+  gap: 2rem;
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.product-info {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.product-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  color: var(--fg-muted);
+}
+
+.product-index {
+  color: var(--fg);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fg-muted);
+}
+
+.dot[data-status='live'] {
+  background: var(--accent);
+}
+
+.product-name {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  margin: 0;
+}
+
+.product-tagline {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+}
+
+.product-description {
+  margin: 0;
+  max-width: 42ch;
+  line-height: 1.8;
+}
+
+.product-features {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.product-features li {
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.product-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 0.5rem;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.product-links {
+  display: flex;
+  gap: 1.5rem;
+  margin: 0.5rem 0 0;
+}
+
+.shots {
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+  transform: perspective(1200px) rotateY(-3deg);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.shots-pair {
+  grid-template-columns: 1fr 1fr;
+}
+
+.shots img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #121214;
+}
+
+.archive-heading {
+  margin: clamp(3rem, 6vw, 5rem) 0 0.75rem;
+}
+
+.archive {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.archive li {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem 2rem;
+  padding-block: 1rem;
+}
+
+.archive-name {
+  color: var(--fg);
+}
+
+@media (min-width: 768px) {
+  .product-row {
+    grid-template-columns: 5fr 7fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .product-row.is-flipped {
+    direction: rtl;
+  }
+  .product-row.is-flipped > * {
+    direction: ltr;
+  }
+  .product-row.is-flipped .shots {
+    transform: perspective(1200px) rotateY(3deg);
+  }
+  .archive li {
+    grid-template-columns: 10rem 1fr auto;
+  }
+}
