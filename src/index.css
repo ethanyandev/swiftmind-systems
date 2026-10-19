@@ -504,10 +504,50 @@ img {
 
 /* ---------- Hero ---------- */
 .hero {
-  position: relative;
-  min-height: 100dvh;
+  padding-top: calc(64px + clamp(3rem, 8vh, 6rem));
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.hero-copy {
+  display: grid;
+  gap: 1.5rem 3rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.hero-lead {
+  display: grid;
+  gap: 1.75rem;
+  justify-items: start;
+}
+
+.hero-title {
+  max-width: 16ch;
+  font-size: clamp(2.5rem, 4.6vw, 4.25rem);
+  margin: 0;
+}
+
+:lang(zh-CN) .hero-title {
+  max-width: 14ch;
+  font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+}
+
+.hero-subtitle {
+  max-width: 40ch;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.hero-actions {
   display: flex;
-  align-items: flex-end;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hero-stage {
+  position: relative;
+  height: clamp(360px, 56vh, 560px);
+  padding: 0;
   overflow: hidden;
   isolation: isolate;
 }
@@ -523,6 +563,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: opacity 600ms ease;
 }
 
 .hero-engine canvas {
@@ -537,50 +578,35 @@ img {
   opacity: 1;
 }
 
-.hero-still {
-  transition: opacity 600ms ease;
-}
-
-.hero.is-engine-ready .hero-still {
+.hero-stage.is-engine-ready .hero-still {
   opacity: 0;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 5;
-  padding-block: clamp(5rem, 10vh, 8rem) clamp(2.5rem, 6vh, 4rem);
-  display: grid;
-  gap: 1.5rem;
-}
-
-.hero-title {
-  max-width: 14ch;
-  font-size: clamp(2.4rem, 7.5vw, 7rem);
-  margin: 0;
-}
-
-.hero-subtitle {
-  max-width: 36ch;
-  margin: 0;
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  color: var(--fg-muted);
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1.5rem;
-}
-
 .hero-tag {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1rem;
+  z-index: 2;
   margin: 0;
-  justify-self: end;
+}
+
+@media (min-width: 768px) {
+  .hero-copy {
+    grid-template-columns: 7fr 5fr;
+    align-items: start;
+  }
+  .hero-subtitle {
+    padding-top: 8px;
+  }
 }
 
 @media (max-width: 767px) {
+  .hero-stage {
+    height: clamp(240px, 42vh, 360px);
+  }
   .hero-tag {
-    justify-self: start;
+    right: 1rem;
+    bottom: 0.75rem;
   }
 }
 

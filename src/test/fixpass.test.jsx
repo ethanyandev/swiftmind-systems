@@ -10,7 +10,7 @@ const css = readFileSync(resolve(process.cwd(), 'src/index.css'), 'utf8')
 
 // Review finding 1: the still image must give way to the live canvas.
 test('stylesheet hides the still once the engine is ready', () => {
-  expect(css).toMatch(/\.hero\.is-engine-ready \.hero-still\s*\{[^}]*opacity:\s*0/)
+  expect(css).toMatch(/\.hero-stage\.is-engine-ready \.hero-still\s*\{[^}]*opacity:\s*0/)
 })
 
 // Review finding 3: english body copy must not fall back to the 700-only display face.

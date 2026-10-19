@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { createWaveField } from '../engine/waveField'
+import { createOrbField } from '../engine/orbField'
 
 export default function HeroEngine() {
   const hostRef = useRef(null)
@@ -7,7 +7,7 @@ export default function HeroEngine() {
   useEffect(() => {
     const host = hostRef.current
     if (!host) return undefined
-    const section = host.parentElement
+    const stage = host.closest('.hero-stage') ?? host.parentElement
     let field = null
     let cancelled = false
     let pointerRaf = 0
@@ -57,14 +57,14 @@ export default function HeroEngine() {
       .then(THREE => {
         if (cancelled) return
         try {
-          field = createWaveField(canvas, { THREE })
+          field = createOrbField(canvas, { THREE })
         } catch (err) {
           console.warn('[hero] engine unavailable, keeping static hero', err)
           canvas.remove()
           return
         }
         canvas.classList.add('is-ready')
-        section?.classList.add('is-engine-ready')
+        stage?.classList.add('is-engine-ready')
         window.addEventListener('pointermove', onPointer, { passive: true })
         window.addEventListener('scroll', onScroll, { passive: true })
         window.addEventListener('resize', onResize)
@@ -84,7 +84,7 @@ export default function HeroEngine() {
       observer.disconnect()
       field?.dispose()
       canvas.remove()
-      section?.classList.remove('is-engine-ready')
+      stage?.classList.remove('is-engine-ready')
     }
   }, [])
 

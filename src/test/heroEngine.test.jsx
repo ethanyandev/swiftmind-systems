@@ -16,7 +16,7 @@ test('a throwing WebGLRenderer leaves the still image and no canvas', async () =
   const { default: Hero } = await import('../components/Hero')
   renderWithProviders(<Hero />)
   await waitFor(() => expect(warn).toHaveBeenCalled())
-  expect(document.querySelector('.hero-engine canvas')).toBeNull()
+  expect(document.querySelector('.hero-stage canvas')).toBeNull()
   expect(document.querySelector('img.hero-still')).toBeInTheDocument()
   warn.mockRestore()
 })
