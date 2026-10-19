@@ -32,7 +32,7 @@ try {
   await page.goto(URL, { waitUntil: 'networkidle' })
   await page.waitForSelector('.hero-engine canvas.is-ready', { timeout: 15000 })
   await sleep(2500)
-  await page.addStyleTag({ content: '.hero-content{visibility:hidden} .site-nav{visibility:hidden} body::before{display:none}' })
+  await page.addStyleTag({ content: '.hero-content{visibility:hidden} .site-nav{visibility:hidden} .hero-still{visibility:hidden} body::before{display:none}' })
   const png = await page.locator('.hero').screenshot({ type: 'png' })
   await browser.close()
   await sharp(png).webp({ quality: 80 }).toFile(OUT)

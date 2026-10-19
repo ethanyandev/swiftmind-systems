@@ -7,6 +7,7 @@ export default function HeroEngine() {
   useEffect(() => {
     const host = hostRef.current
     if (!host) return undefined
+    const section = host.parentElement
     let field = null
     let cancelled = false
     let pointerRaf = 0
@@ -63,6 +64,7 @@ export default function HeroEngine() {
           return
         }
         canvas.classList.add('is-ready')
+        section?.classList.add('is-engine-ready')
         window.addEventListener('pointermove', onPointer, { passive: true })
         window.addEventListener('scroll', onScroll, { passive: true })
         window.addEventListener('resize', onResize)
@@ -82,6 +84,7 @@ export default function HeroEngine() {
       observer.disconnect()
       field?.dispose()
       canvas.remove()
+      section?.classList.remove('is-engine-ready')
     }
   }, [])
 

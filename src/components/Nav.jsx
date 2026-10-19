@@ -45,6 +45,16 @@ export default function Nav() {
   }, [])
 
   useEffect(() => {
+    const mq = window.matchMedia?.('(min-width: 768px)')
+    if (!mq?.addEventListener) return undefined
+    const onChange = e => {
+      if (e.matches) setOpen(false)
+    }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  useEffect(() => {
     if (!open) {
       document.body.style.overflow = ''
       return undefined

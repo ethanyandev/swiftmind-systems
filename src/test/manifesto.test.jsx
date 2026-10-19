@@ -6,10 +6,11 @@ import { translations } from '../translations'
 
 beforeEach(() => localStorage.clear())
 
-test('splitWords splits chinese per character and round-trips', () => {
+test('splitWords round-trips chinese and never starts a unit with punctuation', () => {
   const parts = splitWords('能上线的，才算数。', 'zh')
-  expect(parts.length).toBe('能上线的，才算数。'.length)
   expect(parts.join('')).toBe('能上线的，才算数。')
+  expect(parts.length).toBeGreaterThan(1)
+  for (const unit of parts) expect(unit).not.toMatch(/^[，。、；：？！）」』]/)
 })
 
 test('splitWords splits english on whitespace', () => {
