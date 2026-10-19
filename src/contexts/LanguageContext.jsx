@@ -1,25 +1,41 @@
-import React, { createContext, useState, useContext } from 'react'
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
-const LanguageContext = createContext()
+const LanguageContext = createContext(null)
+const STORAGE_KEY = 'lang'
+const HTML_LANG = { zh: 'zh-CN', en: 'en' }
 
-export const useLanguage = () => {
-  const context = useContext(LanguageContext)
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider')
+function readStored() {
+  try {
+    const v = localStorage.getItem(STORAGE_KEY)
+    return v === 'zh' || v === 'en' ? v : null
+  } catch {
+    return null
   }
-  return context
 }
 
-export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('en') // 'zh' or 'en'
+export const useLanguage = () => {
+  const ctx = useContext(LanguageContext)
+  if (!ctx) throw new Error('useLanguage must be used within a LanguageProvider')
+  return ctx
+}
 
-  const toggleLanguage = () => {
-    setLanguage(prev => prev === 'zh' ? 'en' : 'zh')
-  }
+export const LanguageProvider = ({ initialLanguage = 'zh', children }) => {
+  const [language, setLanguageState] = useState(() => readStored() ?? initialLanguage)
 
-  return (
-    <LanguageContext.Provider value={{ language, toggleLanguage }}>
-      {children}
-    </LanguageContext.Provider>
-  )
+  useEffect(() => {
+    document.documentElement.lang = HTML_LANG[language]
+    try {
+      localStorage.setItem(STORAGE_KEY, language)
+    } catch {
+      /* storage unavailable: language still works for this session */
+    }
+  }, [language])
+
+  const setLanguage = useCallback(lang => {
+    if (lang === 'zh' || lang === 'en') setLanguageState(lang)
+  }, [])
+  const toggleLanguage = useCallback(() => setLanguageState(prev => (prev === 'zh' ? 'en' : 'zh')), [])
+
+  const value = useMemo(() => ({ language, setLanguage, toggleLanguage }), [language, setLanguage, toggleLanguage])
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
 }

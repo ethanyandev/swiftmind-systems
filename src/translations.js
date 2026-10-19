@@ -1,156 +1,134 @@
+// Single source of copy. Every leaf is { zh, en }. English strings never use an em-dash.
 export const translations = {
-  navbar: {
-    home: { zh: '首页', en: 'Home' },
+  meta: {
+    description: {
+      zh: 'SwiftMind Systems 是一家加拿大软件公司，自己设计、开发并上线 AI 产品。',
+      en: 'SwiftMind Systems is a Canadian software company that designs, builds and ships its own AI products.',
+    },
+  },
+  nav: {
     products: { zh: '产品', en: 'Products' },
-    about: { zh: '关于我们', en: 'About Us' },
+    about: { zh: '关于', en: 'About' },
+    contact: { zh: '联系', en: 'Contact' },
     menu: { zh: '菜单', en: 'Menu' },
     close: { zh: '关闭', en: 'Close' },
+    lang: { zh: '语言', en: 'Language' },
+    home: { zh: '回到顶部', en: 'Back to top' },
+    skip: { zh: '跳到正文', en: 'Skip to content' },
+    cta: { zh: '联系我们', en: 'Contact us' },
   },
   hero: {
-    badge: { zh: 'SwiftMind Systems Ltd.', en: 'SwiftMind Systems Ltd.' },
-    title1: { zh: '创新科技，', en: 'Innovative Technology,' },
-    title2: { zh: '敏捷未来', en: 'Agile Future' },
-    description: {
-      zh: '专注于互联网科技解决方案，为教育、企业管理和人工智能应用等领域提供高质量的数字化产品和服务',
-      en: 'Focused on internet technology solutions, providing high-quality digital products and services for education, enterprise management, and AI applications'
+    title: { zh: '我们把 AI 做成能用的产品。', en: 'We turn AI into products people actually use.' },
+    subtitle: {
+      zh: '加拿大的小团队，自己设计、自己写、自己上线。',
+      en: 'A small team in Canada that designs, builds and ships its own products.',
     },
-    exploreProducts: { zh: '探索产品', en: 'Explore Products' },
-    learnMore: { zh: '了解更多', en: 'Learn More' },
-    stats: {
-      products: { zh: '创新产品', en: 'Innovative Products' },
-      satisfaction: { zh: '客户满意', en: 'Client Satisfaction' },
-      support: { zh: '技术支持', en: 'Technical Support' },
+    cta: { zh: '看产品', en: 'See products' },
+    secondary: { zh: '联系我们', en: 'Contact us' },
+  },
+  manifesto: {
+    eyebrow: { zh: '我们怎么做事', en: 'How we work' },
+    body: {
+      zh: '我们不做幻灯片里的 AI。每一个产品都从一个真实的麻烦开始，用模型和代码把它解决掉，然后交到用户手里。能上线的，才算数。',
+      en: "We don't build AI for slide decks. Every product starts with a real annoyance, gets solved with models and code, and goes into users' hands. If it doesn't ship, it doesn't count.",
     },
-    visualTitle: { zh: 'Swift Innovation', en: 'Swift Innovation' },
-    visualSubtitle: { zh: '敏捷创新 · 智能未来', en: 'Agile Innovation · Intelligent Future' },
   },
   products: {
-    badge: { zh: 'Our Products', en: 'Our Products' },
-    title1: { zh: '我们的', en: 'Our' },
-    title2: { zh: '产品', en: 'Products' },
-    subtitle: { zh: '创新解决方案，助力业务增长', en: 'Innovative solutions to drive business growth' },
-    skillgrove: {
-      name: { zh: 'SkillGrove', en: 'SkillGrove' },
-      tagline: { zh: '线上教育课程平台', en: 'Online Education Platform' },
-      description: {
-        zh: '为教育机构和个人讲师提供完整的在线教学解决方案。支持课程管理、在线直播、作业批改、学习进度跟踪等功能，助力教育数字化转型。',
-        en: 'Comprehensive online teaching solution for educational institutions and individual instructors. Features course management, live streaming, assignment grading, and learning progress tracking to drive digital transformation in education.'
-      },
-      status: { zh: '已上线', en: 'Live' },
-      features: {
-        feature1: { zh: '课程管理系统', en: 'Course Management' },
-        feature2: { zh: '在线直播教学', en: 'Live Streaming' },
-        feature3: { zh: '智能作业批改', en: 'Smart Grading' },
-        feature4: { zh: '学习数据分析', en: 'Learning Analytics' },
-      }
+    heading: { zh: '产品', en: 'Products' },
+    intro: {
+      zh: '两个在做的产品，一个已上线，一个在开发。下面还列了过去做过的。',
+      en: 'Two products in progress: one live, one in development. Past work is listed below.',
     },
-    vamerchant: {
-      name: { zh: 'VAMerchant', en: 'VAMerchant' },
-      tagline: { zh: '服务商预约管理系统', en: 'Service Provider Management System' },
+    archiveHeading: { zh: '过去的产品', en: 'Archive' },
+    status: {
+      live: { zh: '已上线', en: 'Live' },
+      development: { zh: '开发中', en: 'In development' },
+      retired: { zh: '已下线', en: 'Retired' },
+    },
+    links: {
+      web: { zh: '官网', en: 'Website' },
+      appstore: { zh: 'App Store', en: 'App Store' },
+    },
+    screenshotAlt: { zh: '{name} 截图 {n}', en: '{name} screenshot {n}' },
+    savevia: {
+      name: { zh: 'SaveVia', en: 'SaveVia' },
+      tagline: { zh: '加拿大信用卡情报站', en: 'Credit card intelligence for Canada' },
       description: {
-        zh: 'VAMerchant帮助服务提供商更清晰、高效地管理日程安排、员工可用性、服务项目和日常运营。',
-        en: 'VAMerchant helps service providers manage scheduling, staff availability, services, and daily operations with greater clarity and efficiency.'
+        zh: '把各家银行的信用卡条款、返现和开卡奖励抓下来、读懂、放进一张表里，再让 AI 助手小维根据你的消费结构告诉你该刷哪张。',
+        en: "Pulls every Canadian bank's card terms, cashback rates and welcome offers into one place, then lets Xiaowei, the AI assistant, tell you which card to use based on how you spend.",
       },
-      status: { zh: '已上线', en: 'Live' },
       features: {
-        feature1: { zh: '预约管理', en: 'Appointment Management' },
-        feature2: { zh: '日程排班', en: 'Schedule Management' },
-        feature3: { zh: '客户管理', en: 'Customer Management' },
-        feature4: { zh: '订单收银', en: 'Orders & Payment' },
-        feature5: { zh: '服务管理', en: 'Service Management' },
-        feature6: { zh: '员工管理', en: 'Staff Management' },
-        feature7: { zh: '通知中心', en: 'Notification Center' },
-        feature8: { zh: '营销中心', en: 'Marketing Automation' },
-      }
+        f1: { zh: '每周自动更新的卡片库', en: 'Card library refreshed weekly' },
+        f2: { zh: '按消费结构算收益', en: 'Earnings computed from your spending mix' },
+        f3: { zh: 'AI 助手小维答疑', en: 'Xiaowei, an AI assistant for card questions' },
+        f4: { zh: 'iOS App 与网页版', en: 'iOS app and web' },
+      },
     },
     moodtini: {
       name: { zh: 'Moodtini', en: 'Moodtini' },
-      tagline: { zh: '基于心情的AI鸡尾酒推荐', en: 'AI Cocktail Recommendations' },
+      tagline: { zh: '按心情推荐鸡尾酒的 AI', en: 'Mood-based AI cocktail picks' },
       description: {
-        zh: '创新的AI驱动鸡尾酒推荐系统，根据用户当前心情、偏好和场景，智能推荐最适合的鸡尾酒。集成AR展示、调酒教程等趣味功能。',
-        en: 'Innovative AI-driven cocktail recommendation system that intelligently suggests the perfect cocktail based on your mood, preferences, and occasion. Features AR displays and mixology tutorials.'
+        zh: '告诉它你现在的心情和场合，它从配方库里挑一杯最合适的，附调法。',
+        en: 'Tell it your mood and the occasion; it picks a cocktail from the recipe library and shows you how to make it.',
       },
-      status: { zh: '开发中', en: 'In Development' },
       features: {
-        feature1: { zh: 'AI心情分析', en: 'AI Mood Analysis' },
-        feature2: { zh: '个性化推荐', en: 'Personalized Recommendations' },
-        feature3: { zh: 'AR酒品展示', en: 'AR Display' },
-        feature4: { zh: '调酒教程', en: 'Mixology Tutorials' },
-      }
-    },
-    savevia: {
-      name: { zh: 'SaveVia', en: 'SaveVia' },
-      tagline: { zh: 'AI信用卡返现优化器', en: 'AI Credit Card Cashback Optimizer' },
-      description: {
-        zh: 'SaveVia帮助加拿大用户优化信用卡使用策略，通过AI智能分析消费习惯，为每个消费类别推荐最佳信用卡，每年可节省$300-$1,000。',
-        en: 'SaveVia helps Canadian users optimize credit card usage through AI-powered spending analysis, recommending the best card for each category to save $300-$1,000 annually.'
+        f1: { zh: '心情与场景输入', en: 'Mood and occasion input' },
+        f2: { zh: '个性化推荐', en: 'Personalised recommendations' },
+        f3: { zh: '调酒步骤', en: 'Step-by-step mixing' },
       },
-      status: { zh: '已上线', en: 'Live' },
-      features: {
-        feature1: { zh: '智能卡片推荐', en: 'Smart Card Recommendations' },
-        feature2: { zh: '消费分析', en: 'Spending Analysis' },
-        feature3: { zh: '返现优化', en: 'Cashback Optimization' },
-        feature4: { zh: '多卡管理', en: 'Multi-Card Management' },
-        feature5: { zh: '交易追踪', en: 'Transaction Tracking' },
-        feature6: { zh: '银行连接', en: 'Bank Connection' },
-        feature7: { zh: '节省报告', en: 'Savings Report' },
-        feature8: { zh: 'AI优化建议', en: 'AI Optimization' },
-      }
     },
-    coreFeatures: { zh: '核心功能', en: 'Core Features' },
+    vamerchant: {
+      name: { zh: 'VAMerchant', en: 'VAMerchant' },
+      tagline: { zh: '服务商预约与排班系统', en: 'Appointment and scheduling for service providers' },
+    },
+    skillgrove: {
+      name: { zh: 'SkillGrove', en: 'SkillGrove' },
+      tagline: { zh: '线上课程平台', en: 'Online course platform' },
+    },
   },
   about: {
-    badge: { zh: 'About Us', en: 'About Us' },
-    title1: { zh: '关于', en: 'About' },
-    title2: { zh: '我们', en: 'Us' },
-    description: {
-      zh: 'SwiftMind Systems 是一家专注于互联网科技解决方案的创新公司。我们致力于通过技术创新，为教育、企业管理和人工智能应用等领域提供高质量的数字化产品和服务。',
-      en: 'SwiftMind Systems is an innovative company focused on internet technology solutions. We are committed to providing high-quality digital products and services for education, enterprise management, and AI applications through technological innovation.'
+    heading: { zh: '关于', en: 'About' },
+    body: {
+      zh: 'SwiftMind Systems 是一家在加拿大注册的软件公司。我们自己出产品，也接少量定制开发；从需求、设计、后端、前端到上线，一条线做完。擅长的方向是把大模型接进真实业务：数据抓取与结构化、对话助手、推荐系统。',
+      en: 'SwiftMind Systems is a software company registered in Canada. We build our own products and take on a small amount of custom work, covering the whole line from requirements and design to backend, frontend and launch. Our strength is wiring large language models into real workflows: data extraction and structuring, conversational assistants, recommendation systems.',
     },
-    mission: {
-      title: { zh: '我们的使命', en: 'Our Mission' },
-      description: { zh: '通过技术创新推动行业数字化转型，让科技服务于每个人', en: 'Drive digital transformation through innovation and make technology serve everyone' }
+    labels: {
+      p1: { zh: '发布', en: 'Ship' },
+      p2: { zh: '数据', en: 'Numbers' },
+      p3: { zh: '工程', en: 'Engineering' },
     },
-    vision: {
-      title: { zh: '我们的愿景', en: 'Our Vision' },
-      description: { zh: '成为行业领先的互联网科技解决方案提供商', en: 'Become a leading provider of internet technology solutions' }
+    principles: {
+      p1: { zh: '先上线，再打磨。', en: 'Ship first, then polish.' },
+      p2: { zh: '数字必须有来源。', en: 'Every number has a source.' },
+      p3: { zh: '代码自己写，不转包。', en: 'We write the code ourselves.' },
     },
-    team: {
-      title: { zh: '我们的团队', en: 'Our Team' },
-      description: { zh: '由充满激情的技术专家组成，致力于打造卓越产品', en: 'Composed of passionate tech experts dedicated to building excellent products' }
+    line: {
+      zh: 'SwiftMind Systems Ltd. · Canada · info@swiftmindsystems.com',
+      en: 'SwiftMind Systems Ltd. · Canada · info@swiftmindsystems.com',
     },
-    stats: {
-      projects: { zh: '产品项目', en: 'Product Projects' },
-      satisfaction: { zh: '客户满意度', en: 'Client Satisfaction' },
-      support: { zh: '技术支持', en: 'Technical Support' },
-      innovation: { zh: '创新可能', en: 'Innovation Possibilities' },
-    }
+  },
+  contact: {
+    heading: { zh: '有想法？聊聊。', en: "Have an idea? Let's talk." },
+    cta: { zh: '发邮件', en: 'Email us' },
+    email: { zh: 'info@swiftmindsystems.com', en: 'info@swiftmindsystems.com' },
   },
   footer: {
-    companyName: { zh: 'SwiftMind Systems Ltd.', en: 'SwiftMind Systems Ltd.' },
-    tagline: { zh: '智能SaaS与AI解决方案', en: 'Intelligent SaaS & AI Solutions' },
-    description: {
-      zh: '专注于互联网科技解决方案，为教育、企业管理和人工智能应用领域提供高质量的数字化产品和服务。',
-      en: 'Focused on internet technology solutions, providing high-quality digital products and services for education, enterprise management, and AI applications.'
-    },
-    quickLinks: { zh: '快速链接', en: 'Quick Links' },
-    contact: { zh: '联系我们', en: 'Contact Us' },
-    location: { zh: 'Canada', en: 'Canada' },
-    privacy: { zh: '隐私政策', en: 'Privacy Policy' },
-    terms: { zh: '服务条款', en: 'Terms of Service' },
-    cookies: { zh: 'Cookie政策', en: 'Cookie Policy' },
-    copyright: { zh: '版权所有', en: 'All rights reserved' },
-  }
+    copyright: { zh: '© 2026 SwiftMind Systems Ltd.', en: '© 2026 SwiftMind Systems Ltd.' },
+    privacy: { zh: '隐私政策', en: 'Privacy' },
+    terms: { zh: '服务条款', en: 'Terms' },
+    savevia: { zh: 'savevia.app', en: 'savevia.app' },
+  },
+  legal: {
+    draft: { zh: '初稿，待审定', en: 'Draft, pending review' },
+  },
 }
 
 export const t = (key, language) => {
-  const keys = key.split('.')
   let value = translations
-
-  for (const k of keys) {
-    value = value[k]
-    if (!value) return key
+  for (const k of key.split('.')) {
+    value = value?.[k]
+    if (value === undefined) return key
   }
-
-  return value[language] || value.zh || key
+  if (value && typeof value === 'object' && 'zh' in value) return value[language] ?? value.zh
+  return key
 }

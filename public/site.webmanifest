@@ -1,7 +1,7 @@
 {
   "name": "SwiftMind Systems",
   "short_name": "SwiftMind",
-  "description": "创新科技，敏捷未来",
+  "description": "SwiftMind Systems 是一家加拿大软件公司，自己设计、开发并上线 AI 产品。",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -14,7 +14,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#10b981",
-  "background_color": "#ffffff",
+  "theme_color": "#FAFAF8",
+  "background_color": "#FAFAF8",
   "display": "standalone"
 }

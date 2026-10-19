@@ -1,0 +1,32 @@
+:root {
+  --bg: #FAFAF8;
+  --fg: #111110;
+  --fg-muted: #6E6D68;
+  --line: rgba(17, 17, 16, 0.08);
+  --line-strong: rgba(17, 17, 16, 0.16);
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-body: "Geist", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+.mono { font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.02em; }
+.muted { color: var(--fg-muted); }
+.wrap { width: min(100% - 2rem, 68ch); margin-inline: auto; padding-block: 2rem 5rem; }
+header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 0.5rem; border-bottom: 1px solid var(--line); margin-bottom: 2rem; }
+header a { color: var(--fg); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 0.5rem; }
+h2 { font-size: 1.25rem; font-weight: 500; margin: 2.5rem 0 0.5rem; }
+p, li { margin: 0 0 0.75rem; }
+ul { padding-left: 1.25rem; }
+a { color: var(--fg); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 3rem 0; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+::selection { background: rgba(17, 17, 16, 0.1); }
