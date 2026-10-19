@@ -12,7 +12,7 @@ A modern, bilingual corporate website for SwiftMind Systems Ltd., showcasing inn
 
 ## Tech Stack
 
-- **Framework:** React 18
+- **Framework:** React 19
 - **Build Tool:** Vite
 - **Styling:** Tailwind CSS
 - **Language:** JavaScript (JSX)
@@ -29,7 +29,7 @@ A modern, bilingual corporate website for SwiftMind Systems Ltd., showcasing inn
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yancheng0821/swiftmind-systems.git
+git clone https://github.com/ethanyandev/swiftmind-systems.git
 cd swiftmind-systems/website
 ```
 
@@ -134,25 +134,13 @@ npm run build
 
 ## Deployment
 
-### AWS Amplify (Recommended) ⭐
+Hosted on **Cloudflare Pages** (project `swiftmind-systems`, custom domain swiftmindsystems.com).
 
-For production deployment with custom domain, we recommend AWS Amplify:
-- ✅ Automatic builds from GitHub
-- ✅ Global CDN
-- ✅ Free SSL certificate
-- ✅ Custom domain support
-- ✅ Continuous deployment
+```bash
+scripts/deploy.sh
+```
 
-**📖 [Complete AWS Amplify Deployment Guide](./DEPLOYMENT.md)**
-
-### Alternative Options
-
-This project can also be deployed to:
-- Vercel
-- Netlify
-- GitHub Pages
-- AWS S3 + CloudFront
-- Any static hosting service
+**📖 [Cloudflare Pages Deployment Guide](./CLOUDFLARE-DEPLOYMENT.md)** — credentials, gotchas, domain setup history.
 
 ## Browser Support
 
