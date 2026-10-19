@@ -228,3 +228,121 @@ img {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ---------- Nav ---------- */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 64px;
+  transition: background-color 200ms ease, border-color 200ms ease;
+  border-bottom: 1px solid transparent;
+}
+
+.site-nav.is-scrolled,
+.site-nav.is-open {
+  background: rgba(10, 10, 11, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: var(--line);
+}
+
+.site-nav-row {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.wordmark {
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-nav-links {
+  display: none;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.site-nav-links > a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--fg-muted);
+  transition: color 160ms ease;
+}
+
+.site-nav-links > a:hover {
+  color: var(--fg);
+}
+
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--fg-muted);
+}
+
+.lang-toggle button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.lang-toggle button[aria-pressed='true'] {
+  color: var(--accent);
+}
+
+.menu-button {
+  min-height: 44px;
+  padding: 0 0.25rem;
+  background: none;
+  border: 0;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.nav-menu {
+  position: fixed;
+  inset: 64px 0 0 0;
+  background: var(--bg);
+  z-index: 49;
+}
+
+.nav-menu[hidden] {
+  display: none;
+}
+
+.nav-menu-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 2rem;
+}
+
+.nav-menu-link {
+  font-size: clamp(2.2rem, 9vw, 3.5rem);
+  padding-block: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .site-nav-links {
+    display: flex;
+  }
+  .menu-button,
+  .nav-menu {
+    display: none;
+  }
+}
