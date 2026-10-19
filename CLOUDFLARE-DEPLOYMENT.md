@@ -13,7 +13,7 @@
 ## 发版
 
 ```bash
-npm test && npm run build          # 本地检查:49 个 vitest 用例 + 构建
+npm test && npm run build          # 本地检查:73 个 vitest 用例 + 构建
 DEPLOY_BRANCH=preview scripts/deploy.sh   # 先发预览:https://preview.swiftmind-systems.pages.dev
 scripts/deploy.sh                  # 终审通过后发生产
 ```
