@@ -78,7 +78,7 @@ SOUL 6 · SPECTACLE 6 · DENSITY 5 · register = brand。
 
 全页外框:一个 1200px 容器,左右两条贯穿全页的竖向细线(`--line`);每个区块之间一条横向细线,线与竖线交点放角点。这是 ElevenLabs「有网格的纸」的质感来源,但线要极淡。
 
-1. **Nav**(64px,固定):左文字字标「SwiftMind」(Geist 500);右:产品 / 关于 / 联系(Geist 400,`--fg-muted`,悬停变 `--fg`)+ 语言切换(Geist Mono「中 / EN」)+ 黑色胶囊「联系我们」(mailto)。滚动超过 24px 后加 `backdrop-blur` 和底线。手机折叠逻辑沿用现有 `#nav-menu`。
+1. **Nav**(64px,固定):左文字字标「SwiftMind」(Geist 500);右:产品 / 关于 / 联系(Geist 400,`--fg-muted`,悬停变 `--fg`)+ 语言切换(Geist Mono「中 / EN」)+ 黑色胶囊「联系我们」(锚到 `#contact`,与 hero 次按钮行为一致;mailto 只在 Contact 区块的按钮上)。滚动超过 24px 后加 `backdrop-blur` 和底线。手机折叠逻辑沿用现有 `#nav-menu`。
 2. **Hero**:上方留白 96px;两栏——左:标题(文案沿用 v1 的 A 版「我们把 AI 做成能用的产品。」/ EN 同)+ 按钮行(黑胶囊「看产品」→ `#products`,白胶囊「联系我们」→ `#contact`);右:副标题一段(`--fg-muted`,17px,最大 40ch)。下方即 §4.4 的引擎卡片。卡片右下角一行 Geist Mono:`SwiftMind Systems Ltd. · Canada`。
 3. **Manifesto**:左窄栏放全页唯一眉题(Geist Mono「Manifesto」),右宽栏放宣言正文(Geist 500 / 系统 500,`clamp(1.5rem, 2.4vw, 2.1rem)`,行高 1.35),GSAP 逐词淡入沿用。字重从 v1 的大黑体降为 500。
 4. **Products**:区块头两栏——左标题「产品」,右一段话(沿用 v1 products.intro 文案)。之后每个产品一张大卡(`--surface`,24px 圆角,内边距 40px):
@@ -86,7 +86,7 @@ SOUL 6 · SPECTACLE 6 · DENSITY 5 · register = brand。
    - 右栏:一块圆角「底板」(SaveVia 用 ember 组的浅两色做对角渐变并叠颗粒;Moodtini 用 lilac 组),截图落在底板上,滚动时截图相对底板做 ±16px 视差。SaveVia 两张手机截图并排、Moodtini 一张横图,素材沿用 `public/screens/`。
    - 奇偶行不再左右翻转(卡片节奏一致更干净)。
    - Archive:两张小卡并排(`--surface`,16px 圆角):产品名 + 一句定位 + Geist Mono「已下线 / Retired」。
-5. **About**:区块头两栏(左标题「关于」,右公司一段话)。下方三张小卡并排:每张顶部一个 Geist Mono 短标签(如「做法 01」不编号——改为「设计 / 工程 / 发布」这类词),下方一句「我们怎么工作」(沿用 v1 about.how 三条)。小卡不放图标。
+5. **About**:区块头两栏(左标题「关于」,右公司一段话)。下方三张小卡并排:每张顶部一个 Geist Mono 短标签(定为「发布 · 数据 · 工程」/「Ship · Numbers · Engineering」,分别对应三条原则的主题),下方一句「我们怎么工作」(沿用 v1 `about.principles` 三条,正文一字不改)。小卡不放图标。
 6. **Contact**:居中一句大字(收尾台阶,500 字重)+ 黑胶囊「发邮件」(mailto)+ 其下 Geist Mono 写出邮箱地址(可选中)。
 7. **Footer**:顶部细线;左「© 2026 SwiftMind Systems Ltd.」,右 savevia.app / Privacy / Terms,全部 Geist Mono `--fg-faint`。
 
@@ -128,3 +128,12 @@ SOUL 6 · SPECTACLE 6 · DENSITY 5 · register = brand。
 1. 方向:B(浅色 + 彩色 3D 物体),以 ElevenLabs 的整体感觉为底,加克制动效。
 2. 首屏卡片里放彩色球体(抽象),SaveVia 截图留在产品区。
 3. v1 已确认的事实(无预约链接、SkillGrove / VAMerchant 下线、只有 SaveVia 有 App Store、不写城市年份、隐私条款由设计者定)全部沿用。
+
+## 8. 审稿后补充的决定(设计者决定,用户可推翻)
+
+1. **球体与色相的绑定**(按半径从大到小):r1.0 = ember(略偏右)· r0.8 = lilac · r0.65 = mist · r0.5 = peach(ember 的浅端:`#FF9A5C → #FFD9B8 → #FFF1E6`)。首屏有意偏暖。
+2. **外框线(Frame)**:容器宽 `min(1200px, 100vw - 48px)`,两条竖线画在容器左右边缘,`position: absolute` 贯穿整个页面包裹层(不是 fixed),位于内容之下——卡片有底色,会自然盖住线。角点只出现在「区块分隔横线 × 两条竖线」的交点,每条分隔线两颗。< 768 隐藏竖线与角点,横向分隔线保留。
+3. **Hero 高度与栏比**:不再强制 100dvh,按内容自然高度;文字行两栏 7 : 5,副标题与标题顶部对齐(下移 8px 做视觉对齐)。引擎挂在卡片 `.hero-stage` 内,`is-ready` / `is-engine-ready` 两个类都落在 `.hero-stage` 上;截图脚本等待 `.hero-stage canvas.is-ready`。
+4. **产品卡内部**:≥ 1024 时左右 5 : 7;能力列表每行之间一条细线;右栏底板占满右栏宽度,比例 4 : 3,内边距 32px;SaveVia 两张手机图等大并排、第二张下移 24px;视差作用在截图上,底板不动。
+5. **截图脚本**:一次运行产出两张——`hero-still.webp`(只截 `.hero-stage`,固定 1200×560,卡片用 `object-fit: cover` 居中显示)和 `og.png`(1200×630,从页面顶部截,含导航与标题)。
+6. **引擎单测**:沿用 fake-THREE 注入模式;断言 4 个球体网格 + 4 个影子平面、每个球的三色 uniform 与 §8.1 一致、`setPointer` 改群组旋转、`setScroll` 改群组 y。
