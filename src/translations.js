@@ -15,6 +15,7 @@ export const translations = {
     lang: { zh: '语言', en: 'Language' },
     home: { zh: '回到顶部', en: 'Back to top' },
     skip: { zh: '跳到正文', en: 'Skip to content' },
+    cta: { zh: '联系我们', en: 'Contact us' },
   },
   hero: {
     title: { zh: '我们把 AI 做成能用的产品。', en: 'We turn AI into products people actually use.' },

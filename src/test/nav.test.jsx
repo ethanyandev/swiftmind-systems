@@ -5,13 +5,25 @@ import Nav from '../components/Nav'
 
 beforeEach(() => localStorage.clear())
 
-test('renders wordmark and the three section anchors', () => {
+test('renders wordmark, the three section anchors and a contact pill', () => {
   renderWithProviders(<Nav />)
   expect(screen.getByRole('link', { name: 'SwiftMind' })).toHaveAttribute('href', '#top')
   const nav = screen.getByRole('navigation')
-  expect(within(nav).getByRole('link', { name: '产品' })).toHaveAttribute('href', '#products')
+  const products = within(nav).getByRole('link', { name: '产品' })
+  expect(products).toHaveAttribute('href', '#products')
+  expect(products).not.toHaveClass('mono')
   expect(within(nav).getByRole('link', { name: '关于' })).toHaveAttribute('href', '#about')
   expect(within(nav).getByRole('link', { name: '联系' })).toHaveAttribute('href', '#contact')
+  const pill = within(nav).getByRole('link', { name: '联系我们' })
+  expect(pill).toHaveAttribute('href', '#contact')
+  expect(pill).toHaveClass('btn-primary')
+  expect(document.querySelector('[data-lang-toggle]')).toHaveClass('mono')
+})
+
+test('the mobile menu also carries the contact pill', () => {
+  renderWithProviders(<Nav />)
+  const menu = document.getElementById('nav-menu')
+  expect(within(menu).getByRole('link', { name: '联系我们', hidden: true })).toHaveAttribute('href', '#contact')
 })
 
 test('language toggle marks the active language and switches copy', async () => {

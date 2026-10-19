@@ -33,7 +33,7 @@ export default function Nav() {
   const buttonRef = useRef(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    const onScroll = () => setScrolled(window.scrollY > 24)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -78,11 +78,14 @@ export default function Nav() {
         </a>
         <nav className="site-nav-links" aria-label={t('nav.menu', language)}>
           {ITEMS.map(item => (
-            <a key={item.id} className="mono" href={`#${item.id}`}>
+            <a key={item.id} className="site-nav-link" href={`#${item.id}`}>
               {t(item.key, language)}
             </a>
           ))}
           <LangToggle language={language} setLanguage={setLanguage} />
+          <a className="btn-primary btn-nav" href="#contact">
+            {t('nav.cta', language)}
+          </a>
         </nav>
         <button
           ref={buttonRef}
@@ -103,6 +106,9 @@ export default function Nav() {
             </a>
           ))}
           <LangToggle language={language} setLanguage={setLanguage} onPick={close} />
+          <a className="btn-primary btn-menu-cta" href="#contact" onClick={close}>
+            {t('nav.cta', language)}
+          </a>
         </div>
       </div>
     </header>

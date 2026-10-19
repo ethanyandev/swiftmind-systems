@@ -426,16 +426,29 @@ img {
   gap: 1.75rem;
 }
 
-.site-nav-links > a {
+.site-nav-link {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  font-size: 0.9375rem;
   color: var(--fg-muted);
   transition: color 160ms ease;
 }
 
-.site-nav-links > a:hover {
+.site-nav-link:hover {
   color: var(--fg);
+}
+
+.btn-nav {
+  min-height: 40px;
+  padding: 0 1.125rem;
+  font-size: 0.875rem;
+  margin-left: 0.25rem;
+}
+
+.btn-menu-cta {
+  justify-self: start;
+  margin-top: 1.5rem;
 }
 
 .lang-toggle {
@@ -481,8 +494,7 @@ img {
 }
 
 .nav-menu-inner {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 0.5rem;
   padding-top: 2rem;
 }
