@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "capture:hero": "node scripts/capture-hero.mjs",
+    "capture:og": "node scripts/capture-og.mjs",
     "optimize:images": "node scripts/optimize-images.mjs"
   },
   "devDependencies": {
@@ -34,7 +34,6 @@
     "@gsap/react": "^2.1.2",
     "gsap": "^3.14.2",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "three": "^0.186.1"
+    "react-dom": "^19.2.0"
   }
 }

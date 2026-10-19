@@ -10,20 +10,11 @@ const css = readFileSync(resolve(process.cwd(), 'src/index.css'), 'utf8')
 
 beforeEach(() => localStorage.clear())
 
-test('the page wrapper carries a decorative frame with two vertical lines', () => {
+// User 2026-10-19: drop the grey frame lines around the page.
+test('the page has no decorative frame lines or section rules', () => {
   renderWithProviders(<AppInner />)
-  const frame = document.querySelector('.page > .frame')
-  expect(frame).not.toBeNull()
-  expect(frame).toHaveAttribute('aria-hidden', 'true')
-  expect(frame.querySelectorAll('.frame-line')).toHaveLength(2)
-  expect(document.querySelectorAll('main .section-rule')).toHaveLength(4)
-})
-
-test('frame lines never intercept the pointer and sit under the content', () => {
-  expect(css).toMatch(/\.frame\s*\{[^}]*pointer-events:\s*none/)
-  expect(css).toMatch(/\.frame\s*\{[^}]*z-index:\s*0/)
-  expect(css).toMatch(/\.frame-line\s*\{[^}]*position:\s*absolute/)
-  expect(css).toMatch(/\.section-rule::before[\s\S]*?\.section-rule::after/)
+  expect(document.querySelector('.frame, .frame-line, .section-rule')).toBeNull()
+  expect(css).not.toMatch(/\.frame|\.section-rule/)
 })
 
 test('Surface renders the requested element with the surface class', () => {

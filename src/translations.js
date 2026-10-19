@@ -25,7 +25,6 @@ export const translations = {
     },
     cta: { zh: '看产品', en: 'See products' },
     secondary: { zh: '联系我们', en: 'Contact us' },
-    tag: { zh: 'SwiftMind Systems Ltd. · Canada', en: 'SwiftMind Systems Ltd. · Canada' },
   },
   manifesto: {
     eyebrow: { zh: '我们怎么做事', en: 'How we work' },

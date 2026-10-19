@@ -13,13 +13,13 @@
 ## 发版
 
 ```bash
-npm test && npm run build          # 本地检查:73 个 vitest 用例 + 构建
+npm test && npm run build          # 本地检查:67 个 vitest 用例 + 构建
 DEPLOY_BRANCH=preview scripts/deploy.sh   # 先发预览:https://preview.swiftmind-systems.pages.dev
 scripts/deploy.sh                  # 终审通过后发生产
 ```
 
 Lighthouse(桌面):`npm run preview &` 然后 `npx -y lighthouse http://localhost:4173/ --preset=desktop --only-categories=performance,accessibility --quiet --chrome-flags="--headless=new"`。
-首屏静态帧:引擎参数改过后跑 `npm run build && npm run capture:hero` 重新生成 `public/hero-still.webp`。
+分享图:首屏改过后跑 `npm run build && npm run capture:og` 重新生成 `public/og.png`。
 
 脚本做的事:读 `~/.config/savevia/env` 里的 `SAVEVIA_CF_ACCOUNT_ID` / `SAVEVIA_CF_PAGES_TOKEN`,`npm ci && npm run build`,`wrangler pages deploy dist`。
 

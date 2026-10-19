@@ -12,8 +12,8 @@ export const PRODUCTS = [
       { kind: 'appstore', href: 'https://apps.apple.com/ca/app/id6756332569' },
     ],
     screens: [
-      { src: '/screens/savevia-1.webp', w: 1290, h: 2796 },
-      { src: '/screens/savevia-2.webp', w: 1290, h: 2796 },
+      { src: '/screens/savevia-1.webp', w: 1320, h: 2868 },
+      { src: '/screens/savevia-2.webp', w: 1320, h: 2868 },
     ],
   },
   {

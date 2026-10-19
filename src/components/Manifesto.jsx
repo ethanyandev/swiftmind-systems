@@ -28,7 +28,7 @@ export default function Manifesto() {
         },
       )
     },
-    { scope: ref, dependencies: [language] },
+    { scope: ref, dependencies: [language], revertOnUpdate: true },
   )
 
   return (

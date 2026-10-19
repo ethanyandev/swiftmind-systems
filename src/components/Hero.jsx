@@ -1,16 +1,14 @@
-import React, { Suspense, lazy, useRef } from 'react'
+import React, { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import { gsap } from '../lib/gsap'
-import { prefersReducedMotion, useCanRunEngine } from '../lib/motion'
+import { prefersReducedMotion } from '../lib/motion'
 import { useLanguage } from '../contexts/LanguageContext'
 import { splitWords } from '../lib/text'
 import { t } from '../translations'
-
-const HeroEngine = lazy(() => import('./HeroEngine'))
+import HeroDemo from './HeroDemo'
 
 export default function Hero() {
   const { language } = useLanguage()
-  const engineOk = useCanRunEngine()
   const ref = useRef(null)
   const title = t('hero.title', language)
   const words = splitWords(title, language)
@@ -56,17 +54,7 @@ export default function Hero() {
           </div>
           <p className="hero-subtitle muted">{t('hero.subtitle', language)}</p>
         </div>
-        <div className="hero-stage surface">
-          <img className="hero-still" src="/hero-still.webp" alt="" width="1200" height="560" fetchPriority="high" />
-          {engineOk ? (
-            <Suspense fallback={<div className="hero-engine" aria-hidden="true" />}>
-              <HeroEngine />
-            </Suspense>
-          ) : (
-            <div className="hero-engine" aria-hidden="true" />
-          )}
-          <p className="mono hero-tag faint">{t('hero.tag', language)}</p>
-        </div>
+        <HeroDemo />
       </div>
     </section>
   )

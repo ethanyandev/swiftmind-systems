@@ -9,7 +9,7 @@ vi.mock('../lib/gsap', () => ({ gsap: gsapMock, ScrollTrigger: {} }))
 const motion = { reduced: false }
 vi.mock('../lib/motion', async importOriginal => {
   const mod = await importOriginal()
-  return { ...mod, prefersReducedMotion: () => motion.reduced, useCanRunEngine: () => false }
+  return { ...mod, prefersReducedMotion: () => motion.reduced }
 })
 
 beforeEach(() => {

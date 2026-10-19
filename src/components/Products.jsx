@@ -18,8 +18,8 @@ export default function Products() {
           <SectionHead title={t('products.heading', language)} body={t('products.intro', language)} />
         </div>
         <div className="product-list">
-          {ordered.map((p, i) => (
-            <ProductRow key={p.slug} product={p} index={i} />
+          {ordered.map(p => (
+            <ProductRow key={p.slug} product={p} />
           ))}
         </div>
         <h3 className="mono archive-heading muted">{t('products.archiveHeading', language)}</h3>

@@ -1,10 +1,9 @@
 # Screenshot sources
 
 Regenerate with `npm run optimize:images -- <inputs> --out public/screens --prefix <name>`.
-Originals live in git history at commit 1adf946 (`git show 1adf946:<path>`).
 
-- savevia-1.webp ← public/SaveVia/4.png (card selection screen)
-- savevia-2.webp ← public/SaveVia/6.png (net annual savings screen)
-- moodtini-1.webp ← public/moodtini.png (web homepage)
+- savevia-1.webp ← ~/work/savevia/docs/appstore/screenshots/6.9/01-library.png (SaveVia 2.0 card library, raw device capture without marketing panel)
+- savevia-2.webp ← ~/work/savevia/docs/appstore/screenshots/6.9/03b-chat-reco.png (SaveVia 2.0 Xiaowei chat recommendation)
+- moodtini-1.webp ← public/moodtini.png at commit 1adf946 (web homepage)
 
-Not used: SaveVia/1.png (welcome screen with a "Save $300 - $1,000 per year" banner; the site does not make that claim).
+The v1 captures (public/SaveVia/*.png at commit 1adf946) are retired. The App Store "final" set is not used because those frames carry marketing headlines.
