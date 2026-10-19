@@ -52,8 +52,8 @@ test('menu closes when the viewport grows past 768px', async () => {
 test('web manifest carries the new description and palette', () => {
   const manifest = JSON.parse(readFileSync(resolve(process.cwd(), 'public/site.webmanifest'), 'utf8'))
   expect(manifest.description).not.toMatch(/赋能|引领|卓越|一站式|创新科技/)
-  expect(manifest.theme_color.toUpperCase()).toBe('#F5F2EC')
-  expect(manifest.background_color.toUpperCase()).toBe('#F5F2EC')
+  expect(manifest.theme_color.toUpperCase()).toBe('#FAFAF8')
+  expect(manifest.background_color.toUpperCase()).toBe('#FAFAF8')
 })
 
 // Review finding 7: product data must not point at the screenshots carrying the savings banner.

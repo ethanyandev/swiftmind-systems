@@ -2,31 +2,57 @@
 
 /* ---------- Tokens ---------- */
 @theme {
-  --color-bg: #F5F2EC;
-  --color-fg: #141311;
-  --color-fg-muted: #6B6861;
-  --color-accent: #FF5A1F;
-  --color-line: rgba(20, 19, 17, 0.1);
-  --color-line-strong: rgba(20, 19, 17, 0.2);
-  --font-display: "Space Grotesk", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-body: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", -apple-system, "Segoe UI", sans-serif;
+  --color-bg: #FAFAF8;
+  --color-surface: #F3F3F0;
+  --color-surface-2: #ECECE8;
+  --color-fg: #111110;
+  --color-fg-muted: #6E6D68;
+  --color-fg-faint: #9A9994;
+  --color-line: rgba(17, 17, 16, 0.08);
+  --color-line-strong: rgba(17, 17, 16, 0.16);
+  --font-display: "Geist", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-body: "Geist", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", -apple-system, "Segoe UI", sans-serif;
 }
 
 :root {
-  --bg: #F5F2EC;
-  --fg: #141311;
-  --fg-muted: #6B6861;
-  --accent: #FF5A1F;
-  --line: rgba(20, 19, 17, 0.1);
-  --line-strong: rgba(20, 19, 17, 0.2);
-  --font-display: "Space Grotesk", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-body: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", -apple-system, "Segoe UI", sans-serif;
-  --gutter: clamp(1rem, 4vw, 3rem);
-  --measure: 72rem;
+  --bg: #FAFAF8;
+  --surface: #F3F3F0;
+  --surface-2: #ECECE8;
+  --fg: #111110;
+  --fg-muted: #6E6D68;
+  --fg-faint: #9A9994;
+  --line: rgba(17, 17, 16, 0.08);
+  --line-strong: rgba(17, 17, 16, 0.16);
+  --dot: rgba(17, 17, 16, 0.35);
+  --shadow-lift: 0 12px 40px rgba(17, 17, 16, 0.06);
+  --font-display: "Geist", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-body: "Geist", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", -apple-system, "Segoe UI", sans-serif;
+  --gutter: 1.5rem;
+  --measure: 1200px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
   color-scheme: light;
 }
+
+/* orb palettes */
+:root {
+  --ember-1: #FF5A1F;
+  --ember-2: #FF9A5C;
+  --ember-3: #FFD9B8;
+  --lilac-1: #7B6CFF;
+  --lilac-2: #C9A7FF;
+  --lilac-3: #FFC2E8;
+  --mist-1: #C9D1CC;
+  --mist-2: #E6EBE7;
+  --mist-3: #F7F9F7;
+  --peach-1: #FF9A5C;
+  --peach-2: #FFD9B8;
+  --peach-3: #FFF1E6;
+}
+/* end orb palettes */
 
 /* ---------- Base ---------- */
 * {
@@ -45,30 +71,36 @@ body {
   color: var(--fg);
   font-family: var(--font-body);
   font-weight: 400;
+  font-size: 1.0625rem;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
-/* Grain: fixed feTurbulence layer, z 1, above engine (z 0), below content (z 5) */
+:lang(zh-CN) body,
+body:lang(zh-CN) {
+  line-height: 1.8;
+}
+
+/* Grain: fixed feTurbulence layer above the engine, below content */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.028;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--bg);
+  background: var(--surface-2);
+  color: var(--fg);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
 }
 
 a {
@@ -85,37 +117,41 @@ img {
 /* ---------- Type ---------- */
 .display {
   font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 0.92;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-wrap: balance;
 }
 
 :lang(zh-CN) .display,
 .display:lang(zh-CN) {
-  font-weight: 600;
   letter-spacing: 0;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .mono {
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   font-variant-numeric: tabular-nums;
 }
 
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-weight: 400;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--fg-muted);
 }
 
 .muted {
   color: var(--fg-muted);
+}
+
+.faint {
+  color: var(--fg-faint);
 }
 
 /* ---------- Layout ---------- */
@@ -125,43 +161,48 @@ img {
 }
 
 .section {
-  padding-block: clamp(5rem, 12vw, 10rem);
+  padding-block: clamp(4rem, 9vw, 7.5rem);
 }
 
 .hairline {
   border-top: 1px solid var(--line);
 }
 
-.vignette {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(245, 242, 236, 0) 50%, rgba(245, 242, 236, 0.7) 100%),
-    radial-gradient(ellipse 90% 70% at 50% 46%, transparent 40%, rgba(245, 242, 236, 0.85) 100%);
-}
-
 /* ---------- Controls ---------- */
-.btn-primary {
+.btn-primary,
+.btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  padding: 0 1.5rem;
-  border-radius: 2px;
-  background: var(--accent);
-  color: var(--bg);
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
+  padding: 0 1.375rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.005em;
   white-space: nowrap;
-  transition: transform 160ms ease, background-color 160ms ease;
+  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.btn-primary {
+  background: var(--fg);
+  color: var(--bg);
 }
 
 .btn-primary:hover {
-  background: #E84E15;
+  background: #2A2A28;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--line-strong);
+}
+
+.btn-secondary:hover {
+  border-color: var(--fg);
   transform: translateY(-1px);
 }
 
@@ -169,18 +210,15 @@ img {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 0.125rem;
   color: var(--fg);
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  box-shadow: inset 0 -1px 0 var(--accent);
-  transition: box-shadow 160ms ease;
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 160ms ease;
 }
 
 .btn-link:hover {
-  box-shadow: inset 0 -2px 0 var(--accent);
+  text-decoration-color: var(--fg);
 }
 
 .sr-only {
@@ -201,9 +239,9 @@ img {
   left: 0.5rem;
   z-index: 100;
   padding: 0.5rem 0.75rem;
-  background: var(--accent);
+  border-radius: 999px;
+  background: var(--fg);
   color: var(--bg);
-  font-family: var(--font-mono);
   font-size: 0.8125rem;
   transform: translateY(-200%);
 }
@@ -239,7 +277,7 @@ img {
 
 .site-nav.is-scrolled,
 .site-nav.is-open {
-  background: rgba(245, 242, 236, 0.78);
+  background: rgba(250, 250, 248, 0.78);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom-color: var(--line);
@@ -298,7 +336,7 @@ img {
 }
 
 .lang-toggle button[aria-pressed='true'] {
-  color: var(--accent);
+  color: var(--fg);
 }
 
 .menu-button {
@@ -494,7 +532,7 @@ img {
 }
 
 .dot[data-status='live'] {
-  background: var(--accent);
+  background: var(--fg);
 }
 
 .product-name {
@@ -559,7 +597,7 @@ img {
   width: 100%;
   border: 1px solid var(--line-strong);
   border-radius: 6px;
-  background: #FBFAF7;
+  background: var(--bg);
   box-shadow: 0 18px 48px rgba(70, 45, 20, 0.12);
 }
 

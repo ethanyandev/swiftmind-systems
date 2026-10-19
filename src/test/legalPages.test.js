@@ -20,3 +20,10 @@ test('privacy names the host, terms names the governing law', () => {
   expect(privacy).toContain('Cloudflare')
   expect(terms).toContain('British Columbia')
 })
+
+test('legal stylesheet shares the v2 tokens and fonts', () => {
+  const css = readFileSync(resolve(process.cwd(), 'public/legal.css'), 'utf8')
+  expect(css).toMatch(/--bg:\s*#FAFAF8/i)
+  expect(css).toMatch(/Geist Mono/)
+  expect(css).not.toMatch(/#FF5A1F|JetBrains/i)
+})
