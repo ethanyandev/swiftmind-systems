@@ -29,7 +29,7 @@ export default function ProductRow({ product }) {
   )
 
   return (
-    <Surface as="article" className="product-card reveal" ref={ref}>
+    <Surface as="article" className={`product-card reveal${product.links.length ? " has-link" : ""}`} ref={ref}>
       <div className="product-info">
         <p className="mono product-meta">
           <span className="dot" data-status={product.status} aria-hidden="true" />

@@ -65,3 +65,10 @@ test('cards without links never lift on hover; feature rows are separated by hai
   expect(css).toMatch(/\.board\[data-palette=['"]ember['"]\]/)
   expect(css).toMatch(/\.board\[data-palette=['"]lilac['"]\]/)
 })
+
+test('only the card with links gets the hover lift class', () => {
+  renderWithProviders(<Products />)
+  expect(screen.getByRole('heading', { name: 'SaveVia' }).closest('.product-card')).toHaveClass('has-link')
+  expect(screen.getByRole('heading', { name: 'Moodtini' }).closest('.product-card')).not.toHaveClass('has-link')
+  expect(css).toMatch(/\.surface\.has-link:hover\s*\{[^}]*transform:\s*translateY\(-2px\)/)
+})
