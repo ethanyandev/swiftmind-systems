@@ -51,7 +51,7 @@ void main() {
   h += 60.0 * exp(-dot(d, d) / (220.0 * 220.0));
   p.z = h;
   float k = clamp((h + 90.0) / 200.0, 0.0, 1.0);
-  vAlpha = 0.35 + 0.65 * k;
+  vAlpha = 0.22 + 0.58 * k;
   vec4 mv = modelViewMatrix * vec4(p, 1.0);
   gl_PointSize = uDpr * (2.0 + 3.0 * k) * (700.0 / -mv.z);
   gl_Position = projectionMatrix * mv;
@@ -63,7 +63,7 @@ varying float vAlpha;
 void main() {
   float d = length(gl_PointCoord - 0.5);
   if (d > 0.5) discard;
-  gl_FragColor = vec4(vec3(0.95), vAlpha * (1.0 - d * 2.0));
+  gl_FragColor = vec4(vec3(0.08), vAlpha * (1.0 - d * 2.0));
 }
 `
 

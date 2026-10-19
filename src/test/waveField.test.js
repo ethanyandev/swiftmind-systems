@@ -12,7 +12,7 @@ function fakeThree() {
     PerspectiveCamera: function () { return camera },
     BufferGeometry: function () { return geometry },
     BufferAttribute: function (arr, n) { this.arr = arr; this.n = n },
-    ShaderMaterial: function (opts) { material.uniforms = opts.uniforms; return material },
+    ShaderMaterial: function (opts) { material.uniforms = opts.uniforms; material.fragmentShader = opts.fragmentShader; return material },
     Points: function () { this.rotation = { x: 0 } },
     Vector2: function (x = 0, y = 0) { this.x = x; this.y = y; this.set = (a, b) => { this.x = a; this.y = b } },
     NormalBlending: 1,
@@ -21,6 +21,12 @@ function fakeThree() {
 }
 
 const canvas = { width: 0, height: 0, clientWidth: 1200, clientHeight: 800 }
+
+test('particles are drawn in ink on paper', () => {
+  const { THREE, material } = fakeThree()
+  createWaveField(canvas, { THREE, reduced: true, raf: () => 0, caf: () => {} })
+  expect(material.fragmentShader).toMatch(/vec3\(0\.0[0-9]+\)/)
+})
 
 test('returns the control surface', () => {
   const { THREE } = fakeThree()

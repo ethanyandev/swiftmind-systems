@@ -1,12 +1,12 @@
 :root {
-  --bg: #0A0A0B;
-  --fg: #F2F2F0;
-  --fg-muted: #9A9A96;
+  --bg: #F5F2EC;
+  --fg: #141311;
+  --fg-muted: #6B6861;
   --accent: #FF5A1F;
-  --line: rgba(255, 255, 255, 0.1);
+  --line: rgba(20, 19, 17, 0.1);
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-body: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", -apple-system, "Segoe UI", sans-serif;
-  color-scheme: dark;
+  color-scheme: light;
 }
 * { box-sizing: border-box; }
 body {

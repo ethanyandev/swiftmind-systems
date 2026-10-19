@@ -2,30 +2,30 @@
 
 /* ---------- Tokens ---------- */
 @theme {
-  --color-bg: #0A0A0B;
-  --color-fg: #F2F2F0;
-  --color-fg-muted: #9A9A96;
+  --color-bg: #F5F2EC;
+  --color-fg: #141311;
+  --color-fg-muted: #6B6861;
   --color-accent: #FF5A1F;
-  --color-line: rgba(255, 255, 255, 0.1);
-  --color-line-strong: rgba(255, 255, 255, 0.18);
+  --color-line: rgba(20, 19, 17, 0.1);
+  --color-line-strong: rgba(20, 19, 17, 0.2);
   --font-display: "Space Grotesk", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-body: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", -apple-system, "Segoe UI", sans-serif;
 }
 
 :root {
-  --bg: #0A0A0B;
-  --fg: #F2F2F0;
-  --fg-muted: #9A9A96;
+  --bg: #F5F2EC;
+  --fg: #141311;
+  --fg-muted: #6B6861;
   --accent: #FF5A1F;
-  --line: rgba(255, 255, 255, 0.1);
-  --line-strong: rgba(255, 255, 255, 0.18);
+  --line: rgba(20, 19, 17, 0.1);
+  --line-strong: rgba(20, 19, 17, 0.2);
   --font-display: "Space Grotesk", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-body: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", -apple-system, "Segoe UI", sans-serif;
   --gutter: clamp(1rem, 4vw, 3rem);
   --measure: 72rem;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 /* ---------- Base ---------- */
@@ -57,7 +57,7 @@ body::before {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.028;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -138,8 +138,8 @@ img {
   z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(10, 10, 11, 0) 55%, rgba(10, 10, 11, 0.55) 100%),
-    radial-gradient(ellipse 90% 70% at 50% 46%, transparent 40%, rgba(10, 10, 11, 0.88) 100%);
+    linear-gradient(180deg, rgba(245, 242, 236, 0) 50%, rgba(245, 242, 236, 0.7) 100%),
+    radial-gradient(ellipse 90% 70% at 50% 46%, transparent 40%, rgba(245, 242, 236, 0.85) 100%);
 }
 
 /* ---------- Controls ---------- */
@@ -161,7 +161,7 @@ img {
 }
 
 .btn-primary:hover {
-  background: #FF7A47;
+  background: #E84E15;
   transform: translateY(-1px);
 }
 
@@ -239,7 +239,7 @@ img {
 
 .site-nav.is-scrolled,
 .site-nav.is-open {
-  background: rgba(10, 10, 11, 0.72);
+  background: rgba(245, 242, 236, 0.78);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom-color: var(--line);
@@ -557,9 +557,10 @@ img {
 
 .shots img {
   width: 100%;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: 6px;
-  background: #121214;
+  background: #FBFAF7;
+  box-shadow: 0 18px 48px rgba(70, 45, 20, 0.12);
 }
 
 .archive-heading {

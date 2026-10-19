@@ -4,8 +4,12 @@ import { resolve } from 'node:path'
 const css = readFileSync(resolve(process.cwd(), 'src/index.css'), 'utf8')
 const html = readFileSync(resolve(process.cwd(), 'index.html'), 'utf8')
 
-test('accent token is the locked signal orange', () => {
+test('palette is warm paper, ink and the locked signal orange', () => {
   expect(css).toMatch(/--accent:\s*#FF5A1F/i)
+  expect(css).toMatch(/--bg:\s*#F5F2EC/i)
+  expect(css).toMatch(/--fg:\s*#141311/i)
+  expect(css).toMatch(/color-scheme:\s*light/)
+  expect(css).not.toMatch(/#0A0A0B/i)
 })
 
 test('no pure white or black anywhere in the stylesheet', () => {
