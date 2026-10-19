@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLanguage } from './contexts/LanguageContext'
 import { t } from './translations'
+import Frame from './components/Frame'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Manifesto from './components/Manifesto'
@@ -13,7 +14,8 @@ import Footer from './components/Footer'
 export default function AppInner() {
   const { language } = useLanguage()
   return (
-    <>
+    <div className="page">
+      <Frame />
       <a className="skip-link" href="#main">
         {t('nav.skip', language)}
       </a>
@@ -26,6 +28,6 @@ export default function AppInner() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </div>
   )
 }

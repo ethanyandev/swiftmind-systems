@@ -168,6 +168,127 @@ img {
   border-top: 1px solid var(--line);
 }
 
+/* Page frame: two hairlines at the container edges, under everything */
+.page {
+  position: relative;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.frame-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+
+.frame-line-l {
+  left: max(var(--gutter), calc(50% - var(--measure) / 2));
+}
+
+.frame-line-r {
+  right: max(var(--gutter), calc(50% - var(--measure) / 2));
+}
+
+.page > main,
+.page > header,
+.page > footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Section divider with a dot where it meets each frame line */
+.section-rule {
+  position: relative;
+  height: 1px;
+  background: var(--line);
+}
+
+.section-rule::before,
+.section-rule::after {
+  content: "";
+  position: absolute;
+  top: -1.5px;
+  width: 4px;
+  height: 4px;
+  background: var(--dot);
+}
+
+.section-rule::before {
+  left: -2px;
+}
+
+.section-rule::after {
+  right: -2px;
+}
+
+@media (max-width: 767px) {
+  .frame,
+  .section-rule::before,
+  .section-rule::after {
+    display: none;
+  }
+}
+
+/* Surfaces */
+.surface {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.surface-sm {
+  border-radius: var(--radius-md);
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+}
+
+.surface.has-link {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.surface.has-link:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Section head: title left, paragraph right */
+.section-head {
+  display: grid;
+  gap: 1rem 3rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.section-title {
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  margin: 0;
+}
+
+:lang(zh-CN) .section-title {
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+}
+
+.section-body {
+  margin: 0;
+  max-width: 44ch;
+  text-wrap: pretty;
+}
+
+@media (min-width: 768px) {
+  .section-head {
+    grid-template-columns: 7fr 5fr;
+    align-items: start;
+  }
+  .section-body {
+    padding-top: 0.5rem;
+  }
+}
+
 /* ---------- Controls ---------- */
 .btn-primary,
 .btn-secondary {
@@ -495,11 +616,6 @@ img {
 }
 
 /* ---------- Products ---------- */
-.section-title {
-  font-size: clamp(2.4rem, 6vw, 5rem);
-  margin: 0 0 clamp(2rem, 5vw, 4rem);
-}
-
 .product-row {
   display: grid;
   gap: 2rem;
