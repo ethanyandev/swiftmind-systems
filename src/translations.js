@@ -93,6 +93,11 @@ export const translations = {
       zh: 'SwiftMind Systems 是一家在加拿大注册的软件公司。我们自己出产品，也接少量定制开发；从需求、设计、后端、前端到上线，一条线做完。擅长的方向是把大模型接进真实业务：数据抓取与结构化、对话助手、推荐系统。',
       en: 'SwiftMind Systems is a software company registered in Canada. We build our own products and take on a small amount of custom work, covering the whole line from requirements and design to backend, frontend and launch. Our strength is wiring large language models into real workflows: data extraction and structuring, conversational assistants, recommendation systems.',
     },
+    labels: {
+      p1: { zh: '发布', en: 'Ship' },
+      p2: { zh: '数据', en: 'Numbers' },
+      p3: { zh: '工程', en: 'Engineering' },
+    },
     principles: {
       p1: { zh: '先上线，再打磨。', en: 'Ship first, then polish.' },
       p2: { zh: '数字必须有来源。', en: 'Every number has a source.' },

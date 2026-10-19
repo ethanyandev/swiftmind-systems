@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { screen } from '@testing-library/react'
 import { renderWithProviders } from './renderWithProviders'
 import { splitWords } from '../lib/text'
@@ -24,4 +26,10 @@ test('manifesto renders the only eyebrow and a screen-reader copy of the body', 
   const sr = document.querySelector('#manifesto .sr-only')
   expect(sr).toHaveTextContent(translations.manifesto.body.zh)
   expect(document.querySelector('#manifesto [aria-hidden="true"] .word')).not.toBeNull()
+  expect(document.querySelector('#manifesto .manifesto-body')).toHaveClass('display')
+})
+
+test('manifesto body sits at the medium display size, not the hero size', () => {
+  const css = readFileSync(resolve(process.cwd(), 'src/index.css'), 'utf8')
+  expect(css).toMatch(/\.manifesto-body\s*\{[^}]*font-size:\s*clamp\(1\.5rem, 2\.4vw, 2\.1rem\)/)
 })

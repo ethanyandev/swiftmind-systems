@@ -9,7 +9,7 @@ export default function Contact() {
   const email = t('contact.email', language)
   return (
     <section id="contact" className="section contact" ref={ref}>
-      <div className="wrap">
+      <div className="wrap contact-inner">
         <h2 className="display contact-heading reveal">{t('contact.heading', language)}</h2>
         <p className="contact-actions reveal">
           <a className="btn-primary" href={`mailto:${email}`}>

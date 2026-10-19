@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="site-footer hairline mono">
       <div className="wrap site-footer-row">
-        <span className="muted">{t('footer.copyright', language)}</span>
+        <span className="faint">{t('footer.copyright', language)}</span>
         <nav className="site-footer-links" aria-label="Footer">
           <a href="https://savevia.app" target="_blank" rel="noopener noreferrer">
             {t('footer.savevia', language)}
