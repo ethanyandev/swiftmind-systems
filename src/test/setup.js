@@ -7,3 +7,7 @@ if (typeof globalThis.IntersectionObserver === 'undefined') {
     disconnect() {}
   }
 }
+
+vi.mock('gsap/ScrollTrigger', () => ({
+  ScrollTrigger: { create: () => ({ kill() {} }), getAll: () => [], refresh() {}, kill() {} },
+}))

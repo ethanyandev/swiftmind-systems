@@ -422,3 +422,34 @@ img {
     justify-self: start;
   }
 }
+
+/* ---------- Manifesto ---------- */
+.manifesto-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.manifesto-body {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.6vw, 3.4rem);
+  max-width: 24ch;
+}
+
+:lang(zh-CN) .manifesto-body {
+  max-width: 22ch;
+}
+
+.word {
+  display: inline-block;
+  white-space: pre;
+}
+
+@media (min-width: 768px) {
+  .manifesto-grid {
+    grid-template-columns: minmax(8rem, 1fr) 4fr;
+    align-items: start;
+  }
+  .manifesto-grid .eyebrow {
+    padding-top: 0.6em;
+  }
+}
