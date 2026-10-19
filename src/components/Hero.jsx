@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
+import { useCanRunEngine } from '../lib/motion'
 import { useLanguage } from '../contexts/LanguageContext'
 import { t } from '../translations'
 
+const HeroEngine = lazy(() => import('./HeroEngine'))
+
 export default function Hero() {
   const { language } = useLanguage()
+  const engineOk = useCanRunEngine()
   return (
     <section id="top" className="hero">
       <img className="hero-still" src="/hero-still.webp" alt="" width="1600" height="1000" fetchPriority="high" />
-      <div className="hero-engine" aria-hidden="true" />
+      {engineOk ? (
+        <Suspense fallback={<div className="hero-engine" aria-hidden="true" />}>
+          <HeroEngine />
+        </Suspense>
+      ) : (
+        <div className="hero-engine" aria-hidden="true" />
+      )}
       <div className="vignette" />
       <div className="wrap hero-content">
         <h1 className="display hero-title">{t('hero.title', language)}</h1>
