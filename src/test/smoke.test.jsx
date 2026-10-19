@@ -3,5 +3,5 @@ import App from '../App'
 
 test('app mounts', () => {
   render(<App />)
-  expect(document.getElementById('app')).toBeInTheDocument()
+  expect(document.getElementById('main')).toBeInTheDocument()
 })
