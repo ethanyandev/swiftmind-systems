@@ -10,7 +10,7 @@ test('palette is the v2 near-white surface set with neutral text', () => {
   expect(css).toMatch(/--surface-2:\s*#ECECE8/i)
   expect(css).toMatch(/--fg:\s*#111110/i)
   expect(css).toMatch(/--fg-muted:\s*#6E6D68/i)
-  expect(css).toMatch(/--fg-faint:\s*#9A9994/i)
+  expect(css).toMatch(/--fg-faint:\s*#6B6A65/i)
   expect(css).toMatch(/color-scheme:\s*light/)
   expect(css).not.toMatch(/#0A0A0B|#F5F2EC|#141311/i)
 })

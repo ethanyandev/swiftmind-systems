@@ -7,7 +7,7 @@
   --color-surface-2: #ECECE8;
   --color-fg: #111110;
   --color-fg-muted: #6E6D68;
-  --color-fg-faint: #9A9994;
+  --color-fg-faint: #6B6A65;
   --color-line: rgba(17, 17, 16, 0.08);
   --color-line-strong: rgba(17, 17, 16, 0.16);
   --font-display: "Geist", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
@@ -21,7 +21,7 @@
   --surface-2: #ECECE8;
   --fg: #111110;
   --fg-muted: #6E6D68;
-  --fg-faint: #9A9994;
+  --fg-faint: #6B6A65;
   --line: rgba(17, 17, 16, 0.08);
   --line-strong: rgba(17, 17, 16, 0.16);
   --dot: rgba(17, 17, 16, 0.35);

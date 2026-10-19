@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLanguage } from './contexts/LanguageContext'
 import { t } from './translations'
-import Frame from './components/Frame'
+import Frame, { SectionRule } from './components/Frame'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Manifesto from './components/Manifesto'
@@ -22,9 +22,13 @@ export default function AppInner() {
       <Nav />
       <main id="main">
         <Hero />
+        <SectionRule />
         <Manifesto />
+        <SectionRule />
         <Products />
+        <SectionRule />
         <About />
+        <SectionRule />
         <Contact />
       </main>
       <Footer />

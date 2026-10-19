@@ -24,6 +24,7 @@ const FOV = 35
 const POINTER_ROT = 0.06
 const POINTER_EASE = 0.06
 const SEGMENTS = 64
+const REF_ASPECT = 1200 / 560
 
 const SIMPLEX = /* glsl */ `
 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -77,14 +78,17 @@ varying vec3 vPos;
 ${SIMPLEX}
 float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }
 void main() {
-  float n1 = snoise(vPos.xy * 1.6 + uSeed + uTime * 0.08) * 0.5 + 0.5;
-  float n2 = snoise(vPos.yz * 2.3 - uSeed - uTime * 0.05) * 0.5 + 0.5;
-  float t = clamp(mix(n1, n2, 0.35), 0.0, 1.0);
+  // Low-frequency drift so each orb reads as one soft gradient, not a planet texture.
+  float n1 = snoise(vPos.xy * 0.55 + uSeed + uTime * 0.06) * 0.5 + 0.5;
+  float n2 = snoise(vPos.yz * 0.8 - uSeed - uTime * 0.04) * 0.5 + 0.5;
+  float t = smoothstep(0.0, 1.0, mix(n1, n2, 0.4));
+  // Bias toward the lighter stops: the darkest colour only appears in pockets.
+  t = mix(t, 0.72, 0.35);
   vec3 col = t < 0.5 ? mix(uA, uB, t * 2.0) : mix(uB, uC, (t - 0.5) * 2.0);
   float light = 0.86 + 0.14 * max(dot(vNormal, normalize(vec3(-0.35, 0.6, 1.0))), 0.0);
   col *= light;
-  float fresnel = pow(1.0 - max(dot(vNormal, vView), 0.0), 2.2);
-  col = mix(col, uC, fresnel * 0.85);
+  float fresnel = pow(1.0 - max(dot(vNormal, vView), 0.0), 1.8);
+  col = mix(col, uC, fresnel * 0.9);
   float grain = (hash(gl_FragCoord.xy + fract(uTime)) - 0.5) * 0.06;
   col += grain;
   gl_FragColor = vec4(col, 1.0);
@@ -177,9 +181,14 @@ export function createOrbField(canvas, opts) {
     return { spec, mesh, shadow, radius, base: { x: 0, y: 0, z: spec.z } }
   })
 
+  // Narrower stages (tablet) shrink the orbs so they keep their spacing instead of overlapping.
   const layout = () => {
     const { halfW, halfH } = visibleHalfExtent(camera.aspect)
+    const fit = Math.min(1, Math.max(0.6, camera.aspect / REF_ASPECT))
     for (const o of orbs) {
+      o.radius = o.spec.r * BASE_RADIUS * fit
+      o.mesh.scale.setScalar(o.radius)
+      o.shadow.scale.set?.(o.radius * 2.6, o.radius * 0.9, 1)
       o.base.x = o.spec.x * halfW
       o.base.y = o.spec.y * halfH
       o.mesh.position.set(o.base.x, o.base.y, o.base.z)

@@ -16,6 +16,7 @@ test('the page wrapper carries a decorative frame with two vertical lines', () =
   expect(frame).not.toBeNull()
   expect(frame).toHaveAttribute('aria-hidden', 'true')
   expect(frame.querySelectorAll('.frame-line')).toHaveLength(2)
+  expect(document.querySelectorAll('main .section-rule')).toHaveLength(4)
 })
 
 test('frame lines never intercept the pointer and sit under the content', () => {

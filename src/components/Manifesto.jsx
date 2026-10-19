@@ -17,9 +17,10 @@ export default function Manifesto() {
       if (prefersReducedMotion()) return
       gsap.fromTo(
         '.word',
-        { opacity: 0.15 },
+        { opacity: 0, y: 6 },
         {
           opacity: 1,
+          y: 0,
           stagger: 0.018,
           duration: 0.6,
           ease: 'power2.out',

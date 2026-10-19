@@ -9,3 +9,12 @@ export default function Frame() {
     </div>
   )
 }
+
+// Horizontal divider between sections, with a dot where it meets each frame line.
+export function SectionRule() {
+  return (
+    <div className="wrap" aria-hidden="true">
+      <div className="section-rule" />
+    </div>
+  )
+}
